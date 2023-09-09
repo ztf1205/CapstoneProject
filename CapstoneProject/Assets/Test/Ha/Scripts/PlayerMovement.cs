@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     // 속도
     public float speed = 12f;
     public float gravity = -9.8f;
+    public float jumpHeight = 3f;
 
     // GroundCheck 
     public Transform groundCheck;
@@ -41,7 +42,12 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(move * speed * Time.deltaTime);
 
-        // 중력 y값 변화량
+        if (Input.GetButtonDown("Jump") && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        // 시간에 따른 중력 y값 변화
         velocity.y += gravity * Time.deltaTime;
 
         // △y = 1/2 * g * time**2
