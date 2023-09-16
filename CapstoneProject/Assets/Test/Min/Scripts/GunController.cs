@@ -41,7 +41,8 @@ public class GunController : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             if (currentFireRate <= 0 && !isReload)
-                Fire();
+                //Fire();
+                Shoot();
         }
         else
         {
@@ -72,6 +73,7 @@ public class GunController : MonoBehaviour
         if (!isReload && Input.GetKeyDown(KeyCode.R))
         {
             StartCoroutine(ReloadCoroutine());
+            emitter.KillAll();
         }
     }
 

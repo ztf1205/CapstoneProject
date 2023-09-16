@@ -22,6 +22,11 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        // 마우스 커서
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+
         capsuleCollider = GetComponent<CapsuleCollider>();
         myRigid = GetComponent<Rigidbody>();
     }
@@ -37,8 +42,8 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        float moveDirX = Input.GetAxis("Horizontal");
-        float moveDirZ = Input.GetAxis("Vertical");
+        float moveDirX = Input.GetAxisRaw("Horizontal");
+        float moveDirZ = Input.GetAxisRaw("Vertical");
 
         Vector3 moveHorizontal = transform.right * moveDirX;
         Vector3 moveVertical = transform.forward * moveDirZ;
@@ -68,7 +73,7 @@ public class PlayerController : MonoBehaviour
 
     private void CharacterRotation()
     {
-        float yRotation = Input.GetAxis("Mouse X");
+        float yRotation = Input.GetAxisRaw("Mouse X");
         Vector3 characterRotationY = new Vector3(0f, yRotation, 0f) * lookSensitivity;
         myRigid.MoveRotation(myRigid.rotation * Quaternion.Euler(characterRotationY));
     }
