@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 using Obi;
+using static Oni;
+using System.Diagnostics.Contracts;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(ObiSolver))]
 public class Solidify : MonoBehaviour
@@ -21,6 +24,8 @@ public class Solidify : MonoBehaviour
     public Color solidColor;
 
     public SolidData[] solids = new SolidData[0];
+
+    private int count = 0;
 
     void Awake()
 	{
@@ -54,9 +59,19 @@ public class Solidify : MonoBehaviour
 			{
 				var col = colliderWorld.colliderHandles[e.contacts.Data[i].bodyB].owner;
                 SolidifyParticles(solver.simplices[e.contacts.Data[i].bodyA], new SolidData(col.transform));
+
+                if (col.name == "Button")
+                {
+                    count++;
+                }
 			}
 		}
-
+        if (count >= 500)
+        {
+            GameObject obj = GameObject.Find("Button");
+            obj.GetComponent<ButtonPressed>().pressed = true;
+            Debug.Log("Button Pressed!");
+        }
 	}
 
     void Solver_OnParticleCollision(object sender, ObiSolver.ObiCollisionEventArgs e)
@@ -74,7 +89,6 @@ public class Solidify : MonoBehaviour
                     SolidifyParticles(particleIndexA, solids[particleIndexB]);
             }
         }
-
     }
 
     void Solver_OnBeginStep(ObiSolver s, float stepTime)
