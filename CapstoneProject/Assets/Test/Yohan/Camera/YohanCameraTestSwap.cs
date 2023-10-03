@@ -52,8 +52,8 @@ public class YohanCameraTestSwap : MonoBehaviour
 
                 foreach (var box in boxs)
                 {
-                    BoxCollider boxCollider = box.GetComponent<BoxCollider>();
-                    boxCollider.size = new Vector3(100f, 1f, 1f);
+                    BoxCollider boxcollider = box.GetComponent<BoxCollider>();
+                    boxcollider.size = new Vector3(100f, 1f, 1f);
                 }
             }
         }
