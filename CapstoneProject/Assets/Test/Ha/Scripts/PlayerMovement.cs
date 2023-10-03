@@ -6,14 +6,14 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
 
-    // ¼Óµµ
+    // ì†ë„
     public float speed = 12f;
     public float gravity = -9.8f;
     public float jumpHeight = 3f;
 
     // GroundCheck 
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
+    public float groundDistance = 0.0f;
     public LayerMask groundMask;
 
     Vector3 velocity;
@@ -47,10 +47,10 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        // ½Ã°£¿¡ µû¸¥ Áß·Â y°ª º¯È­
+        // ì‹œê°„ì— ë”°ë¥¸ ì¤‘ë ¥ yê°’ ë³€í™”
         velocity.y += gravity * Time.deltaTime;
 
-        // ¡ây = 1/2 * g * time**2
+        // â–³y = 1/2 * g * time**2
         controller.Move(velocity * Time.deltaTime);
     }
 }
