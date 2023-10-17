@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlatformManager : MonoBehaviour
@@ -25,77 +26,26 @@ public class PlatformManager : MonoBehaviour
         waterB = waterCubeB.GetComponent<Water>();
     }
 
+    private void SetTarget()
+    {
+        float netPressure = (pA.Pressure - pB.Pressure);
+
+        pA.TargetPosY = pA.InitPosition.y - netPressure * unit;
+        pB.TargetPosY = pB.InitPosition.y + netPressure * unit / 2f;
+
+        waterA.TargetPosY = waterA.InitPosition.y - netPressure * unit / 2f;
+        waterB.TargetPosY = waterB.InitPosition.y + netPressure * unit / 2f / 2f;
+        waterA.TargetScaleY = waterA.InitScale.y - netPressure * unit;
+        waterB.TargetScaleY = waterB.InitScale.y + netPressure * unit / 2f;
+    }
 
     public void Move()
     {
-        StateSetting();
+        SetTarget();
 
-        switch (pA.MovingState)
-        {
-            case Platform.State.ASCEND:
-                pA.Ascend(pA.DeltaY);
-                waterA.IncreaseVolume(pA.DeltaY);
-                break;
-            case Platform.State.DESCEND:
-                pA.Descend(pA.DeltaY);
-                waterA.DecreaseVolume(pA.DeltaY);
-                break;
-            case Platform.State.RESET:
-                pA.ResetPosition();
-                waterA.RestoreVolume();
-                break;
-            default:
-                break;
-        }
-
-        switch (pB.MovingState)
-        {
-            case Platform.State.ASCEND:
-                pB.Ascend(pB.DeltaY);
-                waterB.IncreaseVolume(pB.DeltaY);
-                break;
-            case Platform.State.DESCEND:
-                pB.Descend(pB.DeltaY);
-                waterB.DecreaseVolume(pB.DeltaY);
-                break;
-            case Platform.State.RESET:
-                pB.ResetPosition();
-                waterB.RestoreVolume();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void StateSetting()
-    {
-        float pAtotalPressure = pA.TotalPressure;
-        float pBtotalPressure = pB.TotalPressure;
-
-        if (pAtotalPressure > pBtotalPressure)
-        {
-            float netPressure = (pAtotalPressure - pBtotalPressure);
-
-            pA.DeltaY = netPressure * unit;
-            pB.DeltaY = netPressure * unit / 2f;
-
-            pA.MovingState = Platform.State.DESCEND;
-            pB.MovingState = Platform.State.ASCEND;
-        }
-        else if (pBtotalPressure > pAtotalPressure)
-        {
-            float netPressure = (pBtotalPressure - pAtotalPressure);
-
-            pA.DeltaY = netPressure * unit;
-            pB.DeltaY = netPressure * unit / 2f;
-
-            pA.MovingState = Platform.State.ASCEND;
-            pB.MovingState = Platform.State.DESCEND;
-        }
-        else
-        {
-            pA.MovingState = Platform.State.RESET;
-            pB.MovingState = Platform.State.RESET;
-        }
+        pA.ChangePosition();
+        waterA.ChangeVolume();
+        pB.ChangePosition();
+        waterB.ChangeVolume();
     }
 }

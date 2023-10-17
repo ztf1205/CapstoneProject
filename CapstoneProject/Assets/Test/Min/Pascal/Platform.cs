@@ -2,116 +2,87 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Platform : MonoBehaviour
 {
-    public enum State
-    {
-        ASCEND,
-        DESCEND,
-        RESET
-    };
-    public State MovingState {get;set;}
+    public Vector3 InitPosition { get; set; }
+    public float TargetPosY { get; set; }
 
-    private float totalPressure;
-    public float TotalPressure => totalPressure;
+    public float Pressure { get; set; }
 
-    private float deltaY;
-    public float DeltaY { get; set; }
+    public bool IsItemOn { get; set; } = false;
+    public bool IsPlayerOn { get; set; } = false;
 
     private float movingDuration = 5f;
 
     private float scaleX;
-
-    private Vector3 initPosition;
-    private Vector3 targetPosition;
 
     private PlatformManager manager;
 
     private void Start()
     {
         scaleX = transform.localScale.x / 12f;
-        initPosition = transform.localPosition;
+        InitPosition = transform.localPosition;
 
         manager = GameObject.FindObjectOfType<PlatformManager>().GetComponent<PlatformManager>();
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    Debug.Log("Enter");
-    //    if (collision.gameObject.name == "Player")
-    //    {
-    //        float mass = collision.rigidbody.mass;
-    //        totalPressure += mass / scaleX;
-    //    }
-    //    else if (collision.gameObject.name == "Weight")
-    //    {
-    //        float mass = collision.rigidbody.mass;
-    //        totalPressure += mass / scaleX;
-    //    }
+    private void SetPressure()
+    {
+        Pressure = 0;
+        if (IsPlayerOn)
+        {
+            Pressure += (4 / scaleX);
+            if (IsItemOn)
+                Pressure += (2 / scaleX);
+        }
+        else
+        {
+            if (IsItemOn)
+                Pressure += (2 / scaleX);
+        }
+    }
 
-    //    manager.Move();
-    //}
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Player")
+            IsPlayerOn = true;
+        if (collision.gameObject.name == "Item")
+            IsItemOn = true;
 
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    Debug.Log("Exit");
-    //    if (collision.gameObject.name == "Player")
-    //    {
-    //        float mass = collision.rigidbody.mass;
-    //        totalPressure -= mass / scaleX;
-    //    }
-    //    else if (collision.gameObject.name == "Weight")
-    //    {
-    //        float mass = collision.rigidbody.mass;
-    //        totalPressure -= mass / scaleX;
-    //    }
+        SetPressure();
+        manager.Move();
+    }
 
-    //    manager.Move();
-    //}
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.name == "Player")
+            IsPlayerOn = false;
+        if (collision.gameObject.name == "Item")
+            IsItemOn = false;
+
+        SetPressure();
+        manager.Move();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Enter");
-        float mass = other.attachedRigidbody.mass;
-        totalPressure += mass / scaleX;
-
-        manager.Move();
+        other.transform.SetParent(transform);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Exit");
-
-        float mass = other.attachedRigidbody.mass;
-        totalPressure -= mass / scaleX;
-
-        manager.Move();
+        other.transform.SetParent(null);
     }
 
-    public void Ascend(float deltaY)
-    {
-        //transform.DOKill();
-
-        targetPosition = transform.localPosition + new Vector3(0f, deltaY, 0f);
-        transform.DOMove(targetPosition, movingDuration);
-    }
-
-    public void Descend(float deltaY)
-    {
-        //transform.DOKill();
-
-        targetPosition = transform.localPosition - new Vector3(0f, deltaY, 0f);
-        transform.DOMove(targetPosition, movingDuration);
-    }
-
-    public void ResetPosition()
+    public void ChangePosition()
     {
         transform.DOKill();
 
-        targetPosition = initPosition;
+        Vector3 targetPosition = new Vector3(InitPosition.x, TargetPosY, InitPosition.z);
         transform.DOMove(targetPosition, movingDuration);
     }
 }
