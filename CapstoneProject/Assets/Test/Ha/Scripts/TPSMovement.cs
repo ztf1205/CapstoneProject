@@ -28,6 +28,7 @@ public class TPSMovement : MonoBehaviour
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         float horizontal = Input.GetAxisRaw("Horizontal");
+        Debug.Log(horizontal);
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
@@ -41,11 +42,6 @@ public class TPSMovement : MonoBehaviour
             //move
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
-        }
-
-        if (isGrounded)
-        {
-            Debug.Log("Ground!");
         }
 
         if (Input.GetButtonDown("Jump") && isGrounded)
