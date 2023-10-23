@@ -15,7 +15,7 @@ public class PlatformManager : MonoBehaviour
     private Water waterA;
     private Water waterB;
 
-    private float unit = 3f;
+    private float unit = 0.7f;
 
     void Start()
     {

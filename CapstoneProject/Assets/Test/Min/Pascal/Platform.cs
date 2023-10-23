@@ -16,7 +16,7 @@ public class Platform : MonoBehaviour
     public bool IsItemOn { get; set; } = false;
     public bool IsPlayerOn { get; set; } = false;
 
-    private float movingDuration = 5f;
+    private float movingDuration = 4f;
 
     private float scaleX;
 
@@ -24,7 +24,7 @@ public class Platform : MonoBehaviour
 
     private void Start()
     {
-        scaleX = transform.localScale.x / 12f;
+        scaleX = transform.localScale.x / 3.026397f;
         InitPosition = transform.localPosition;
 
         manager = GameObject.FindObjectOfType<PlatformManager>().GetComponent<PlatformManager>();
@@ -37,7 +37,7 @@ public class Platform : MonoBehaviour
         {
             Pressure += (4 / scaleX);
             if (IsItemOn)
-                Pressure += (2 / scaleX);
+                Pressure += (1 / scaleX);
         }
         else
         {
@@ -48,9 +48,9 @@ public class Platform : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Player")
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
             IsPlayerOn = true;
-        if (collision.gameObject.name == "Item")
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Item"))
             IsItemOn = true;
 
         SetPressure();
@@ -59,7 +59,7 @@ public class Platform : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.name == "Player")
+        if (collision.gameObject.name == "unitychan")
             IsPlayerOn = false;
         if (collision.gameObject.name == "Item")
             IsItemOn = false;
@@ -70,12 +70,14 @@ public class Platform : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        other.transform.SetParent(transform);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
+            other.transform.SetParent(transform);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        other.transform.SetParent(null);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
+            other.transform.SetParent(null);
     }
 
     public void ChangePosition()
