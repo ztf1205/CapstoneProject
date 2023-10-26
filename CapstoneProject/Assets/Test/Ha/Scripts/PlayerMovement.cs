@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         if (mainCamera.orthographic)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
-            Vector3 move = new Vector3(0, 0, horizontal) * Time.deltaTime * speed;
+            Vector3 move = new Vector3(horizontal, 0, 0) * Time.deltaTime * speed;
 
             controller.Move(move);
         }
