@@ -10,6 +10,7 @@ public class CheckPointCollider : MonoBehaviour
     {
         checkPoint = GameObject.FindGameObjectWithTag("CheckPoint");
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
