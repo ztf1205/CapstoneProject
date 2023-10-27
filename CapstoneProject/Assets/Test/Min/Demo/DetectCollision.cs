@@ -48,6 +48,7 @@ public class DetectCollision : MonoBehaviour
     private void CheckDimensionSwitchAvailability()
     {
         int layerMask = (-1) - (1 << LayerMask.NameToLayer("Player"));
+        layerMask = ~(1 << LayerMask.NameToLayer("Ignore Raycast")) & ~(1 << LayerMask.NameToLayer("Player"));
 
         Vector3 pos = new Vector3(transform.position.x, transform.position.y+0.5f, transform.position.z - 20f);
         //Debug.DrawRay(pos, Vector3.forward*40f, Color.red);
