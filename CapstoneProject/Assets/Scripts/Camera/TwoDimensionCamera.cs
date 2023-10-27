@@ -18,7 +18,7 @@ public class TwoDimensionCamera : MonoBehaviour
 
     private void Init()
     {
-        target = GameObject.Find("unitychan").transform;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         transform.position = new Vector3(target.position.x, target.position.y, -80f);
     }
 
