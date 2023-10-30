@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Domino
   - CheckPoint
   layers:
   - Default
@@ -13,8 +12,8 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
-  - Item
+  - 
+  - 
   - 
   - 
   - 

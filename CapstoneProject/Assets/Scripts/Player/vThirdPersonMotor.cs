@@ -37,6 +37,8 @@ namespace Invector.vCharacterController
         [Tooltip("Add Extra jump height, if you want to jump only with Root Motion leave the value with 0.")]
         [HideInInspector]
         public float jumpHeight = 5f;
+        [HideInInspector]
+        public float originalJumpHeight = 5f;
 
         [Tooltip("Speed that the character will move while airborne")]
         public float airSpeed = 5f;

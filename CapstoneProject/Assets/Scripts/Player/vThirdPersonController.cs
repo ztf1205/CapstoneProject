@@ -1,4 +1,5 @@
 using System.Collections;
+using System.ComponentModel.Design;
 using UnityEngine;
 
 namespace Invector.vCharacterController
@@ -121,6 +122,7 @@ namespace Invector.vCharacterController
 
         public virtual void Jump()
         {
+            jumpHeight = originalJumpHeight;
             // trigger jump behaviour
             jumpCounter = jumpTimer;
             isJumping = true;
@@ -132,18 +134,16 @@ namespace Invector.vCharacterController
                 animator.CrossFadeInFixedTime("JumpMove", .2f);
         }
 
-        public void SuperJump(float jumpHeight)
-        {
-            this.jumpHeight = jumpHeight;
-            Jump();
+        public void SuperJump(float _jumpHeight)
+        {   
+            jumpHeight = _jumpHeight;
+            jumpCounter = jumpHeight / originalJumpHeight * 0.3f;
+            isJumping = true;
 
-            StartCoroutine(ResetJumpHeight());
-        }
-
-        IEnumerator ResetJumpHeight()
-        {
-            yield return new WaitForSeconds(2f);
-            this.jumpHeight = 5f;
+            if (input.sqrMagnitude < 0.1f)
+                animator.CrossFadeInFixedTime("Jump", 0.1f);
+            else
+                animator.CrossFadeInFixedTime("JumpMove", .2f);
         }
     }
 }

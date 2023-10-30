@@ -15,20 +15,6 @@ public class DetectCollision : MonoBehaviour
     void Update()
     {
         CheckDimensionSwitchAvailability();
-        CheckItem();
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Water"))
-        {
-            Debug.Log("Game Over!!!");
-        }
-
-        else if (collision.gameObject.name == "JumpPad" ||  collision.gameObject.name == "JumpPad (1)")
-        {
-            GetComponent<vThirdPersonController>().SuperJump(15f);
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -47,8 +33,8 @@ public class DetectCollision : MonoBehaviour
 
     private void CheckDimensionSwitchAvailability()
     {
-        int layerMask = (-1) - (1 << LayerMask.NameToLayer("Player"));
-        layerMask = ~(1 << LayerMask.NameToLayer("Ignore Raycast")) & ~(1 << LayerMask.NameToLayer("Player"));
+        //int layerMask = (-1) - (1 << LayerMask.NameToLayer("Player"));
+        int layerMask = ~(1 << LayerMask.NameToLayer("Ignore Raycast"));
 
         Vector3 pos = new Vector3(transform.position.x, transform.position.y+0.5f, transform.position.z - 20f);
         //Debug.DrawRay(pos, Vector3.forward*40f, Color.red);
@@ -63,22 +49,6 @@ public class DetectCollision : MonoBehaviour
             GameManager.instance.CanSwitchDimension = true;
             GameManager.instance.ChangeColor();
         }
-    }
-
-    private void CheckItem()
-    {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 2f))
-        {
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Item"))
-            {
-                itemText.gameObject.SetActive(true);
-            }
-        }
-        else
-        {
-            itemText.gameObject.SetActive(false);
-        }
-        
     }
     
 }
