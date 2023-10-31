@@ -6,6 +6,8 @@ TagManager:
   tags:
   - CheckPoint
   - Item
+  - Cube
+  - Crystal
   layers:
   - Default
   - TransparentFX
