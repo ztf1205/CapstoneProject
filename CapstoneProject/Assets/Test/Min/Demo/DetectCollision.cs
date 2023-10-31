@@ -12,11 +12,6 @@ public class DetectCollision : MonoBehaviour
     [SerializeField] private Camera camera;
     [SerializeField] private TextMeshProUGUI itemText;
 
-    void Update()
-    {
-        CheckDimensionSwitchAvailability();
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Trigger")
@@ -31,24 +26,4 @@ public class DetectCollision : MonoBehaviour
         }
     }
 
-    private void CheckDimensionSwitchAvailability()
-    {
-        //int layerMask = (-1) - (1 << LayerMask.NameToLayer("Player"));
-        int layerMask = ~(1 << LayerMask.NameToLayer("Ignore Raycast"));
-
-        Vector3 pos = new Vector3(transform.position.x, transform.position.y+0.5f, transform.position.z - 20f);
-        //Debug.DrawRay(pos, Vector3.forward*40f, Color.red);
-
-        if (Physics.Raycast(pos, Vector3.forward, out RaycastHit hit, 40.0f, layerMask))
-        {
-            GameManager.instance.CanSwitchDimension = false;
-            GameManager.instance.ChangeColor();
-        }
-        else
-        {
-            GameManager.instance.CanSwitchDimension = true;
-            GameManager.instance.ChangeColor();
-        }
-    }
-    
 }

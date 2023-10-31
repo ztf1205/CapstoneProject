@@ -14,10 +14,6 @@ public class Water : MonoBehaviour
 
     private float movingDuration = 5f;
 
-    // restoreRate 부피 변화량에 따라 시간 다르게 설정해야 함
-    [SerializeField] private float restoringDuration = 5f;
-
-
     void Start()
     {
         InitPosition = transform.localPosition;

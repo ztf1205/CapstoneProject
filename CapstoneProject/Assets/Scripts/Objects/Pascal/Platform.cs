@@ -31,7 +31,7 @@ public class Platform : MonoBehaviour
             scaleX = 1.0f;
         else if (this.gameObject.name == "PlatformB")
             scaleX = 2.0f;
-        //scaleX = transform.localScale.x / 3.026397f;
+
         InitPosition = transform.localPosition;
 
         manager = GameObject.FindObjectOfType<PlatformManager>().GetComponent<PlatformManager>();
@@ -55,17 +55,15 @@ public class Platform : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        float mass;
-
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             IsPlayerOn = true;
-            playerMass = 4f;
+            playerMass = collision.gameObject.GetComponent<Rigidbody>().mass;
         }
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Item"))
+        if (collision.gameObject.CompareTag("Item"))
         {
             IsItemOn = true;
-            itemMass = 2f;
+            itemMass = collision.gameObject.GetComponent<Rigidbody>().mass;
         }
         SetPressure();
         manager.Move();
@@ -73,9 +71,9 @@ public class Platform : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (collision.gameObject.CompareTag("Player"))
             IsPlayerOn = false;
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Item"))
+        if (collision.gameObject.CompareTag("Item"))
             IsItemOn = false;
 
         SetPressure();
@@ -84,13 +82,13 @@ public class Platform : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
+        if (other.gameObject.CompareTag("Item"))
             other.transform.SetParent(transform);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Item"))
+        if (other.gameObject.CompareTag("Item"))
             other.transform.SetParent(null);
     }
 

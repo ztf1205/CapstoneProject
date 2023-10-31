@@ -1,28 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class DimensionManager : MonoBehaviour
 {
-    public static GameManager instance;
-
     [SerializeField] private Camera threeDimensionCam;
     [SerializeField] private Camera twoDimensionCam;
 
     public bool Is2D { get; set; } = false;
     public bool CanSwitchDimension { get; set; } = true;
 
-    //temp
-    public Image image;
-
-    private void Awake()
+    void Start()
     {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
-
         Init();
     }
 
@@ -48,14 +37,5 @@ public class GameManager : MonoBehaviour
     {
         string eventName = Is2D ? "ResizeCollider" : "ResetCollider";
         EventManager.TriggerEvent(eventName);
-    }
-
-
-    public void ChangeColor()
-    {
-        if (CanSwitchDimension)
-            image.color = Color.green;
-        else 
-            image.color = Color.red;
     }
 }

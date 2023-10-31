@@ -21,12 +21,15 @@ namespace Invector.vCharacterController
         [HideInInspector] public vThirdPersonCamera tpCamera;
         [HideInInspector] public Camera cameraMain;
 
+        private DimensionManager dimManager;
+
         #endregion
 
         protected virtual void Start()
         {
             InitilizeController();
             InitializeTpCamera();
+            dimManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
         }
 
         protected virtual void FixedUpdate()
@@ -42,9 +45,9 @@ namespace Invector.vCharacterController
             cc.UpdateAnimator();            // updates the Animator Parameters
 
             // Switch Dimension
-            if (Input.GetKeyDown(KeyCode.Q) && GameManager.instance.CanSwitchDimension)
+            if (Input.GetKeyDown(KeyCode.Q) && dimManager.CanSwitchDimension)
             {
-                GameManager.instance.SwitchDimension();
+                dimManager.SwitchDimension();
             }
         }
 

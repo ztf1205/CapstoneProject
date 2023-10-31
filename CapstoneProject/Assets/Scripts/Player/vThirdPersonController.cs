@@ -6,6 +6,13 @@ namespace Invector.vCharacterController
 {
     public class vThirdPersonController : vThirdPersonAnimator
     {
+        private DimensionManager dimManager;
+
+        private void Start()
+        {
+            dimManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
+        }
+        
         public virtual void ControlAnimatorRootMotion()
         {
             if (!this.enabled) return;
@@ -80,7 +87,7 @@ namespace Invector.vCharacterController
             }
 
             // Change Input
-            if (GameManager.instance.Is2D)
+            if (dimManager.Is2D)
             {
                 moveDirection = new Vector3(inputSmooth.x, 0, 0);
             }
