@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class ZRaycaster : MonoBehaviour
 {
     private DimensionManager dimManager;
-    // tmp
-    public Image image;
 
     // Start is called before the first frame update
     void Start()
@@ -33,20 +31,10 @@ public class ZRaycaster : MonoBehaviour
         if (Physics.Raycast(pos, Vector3.forward, out RaycastHit hit, 40.0f, layerMask))
         {
             dimManager.CanSwitchDimension = false;
-            ChangeColor();
         }
         else
         {
             dimManager.CanSwitchDimension = true;
-            ChangeColor();
         }
-    }
-
-    public void ChangeColor()
-    {
-        if (dimManager.CanSwitchDimension)
-            image.color = Color.green;
-        else
-            image.color = Color.red;
     }
 }

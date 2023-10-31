@@ -8,7 +8,17 @@ public class DimensionManager : MonoBehaviour
     [SerializeField] private Camera twoDimensionCam;
 
     public bool Is2D { get; set; } = false;
-    public bool CanSwitchDimension { get; set; } = true;
+    private bool canSwitchDimension;
+    public bool CanSwitchDimension
+    {
+        get { return canSwitchDimension; }
+        set
+        {
+            canSwitchDimension = value;
+            string eventName = canSwitchDimension ? "ChangeToGreen" : "ChangeToRed";
+            EventManager.TriggerEvent(eventName);
+        }
+    }
 
     void Start()
     {

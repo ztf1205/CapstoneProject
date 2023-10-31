@@ -10,8 +10,6 @@ using TMPro;
 public class DetectCollision : MonoBehaviour
 {
     [SerializeField] private Camera camera;
-    [SerializeField] private TextMeshProUGUI itemText;
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name == "Trigger")
