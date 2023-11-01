@@ -8,11 +8,11 @@ public class JumpPad : MonoBehaviour
 {
     protected float jumpHeight;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            vThirdPersonController cc = collision.gameObject.GetComponent<vThirdPersonController>();
+            vThirdPersonController cc = other.gameObject.GetComponent<vThirdPersonController>();
 
             // 점프대 디폴트 높이값: 7.5
             jumpHeight = cc.originalJumpHeight * 1.5f;
