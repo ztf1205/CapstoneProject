@@ -1,4 +1,5 @@
 using UnityEngine;
+using NaughtyAttributes;
 
 namespace Invector.vCharacterController
 {
@@ -23,6 +24,18 @@ namespace Invector.vCharacterController
 
         private DimensionManager dimManager;
 
+        private Rigidbody rigidbodyComponent;
+        private Vector3 prevVelocity;
+        private Vector3 prevPos;
+        private Quaternion prevRotation;
+        private bool isJumpStop = false;
+        private Animator animator;
+
+        [HorizontalLine, SerializeField]
+        private GameObject plane;
+        [SerializeField]
+        private GameObject playerUI;
+
         #endregion
 
         protected virtual void Start()
@@ -30,6 +43,9 @@ namespace Invector.vCharacterController
             InitilizeController();
             InitializeTpCamera();
             dimManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
+
+            rigidbodyComponent = GetComponent<Rigidbody>();
+            animator = GetComponent<Animator>();
         }
 
         protected virtual void FixedUpdate()
@@ -41,8 +57,20 @@ namespace Invector.vCharacterController
 
         protected virtual void Update()
         {
-            InputHandle();                  // update the input methods
-            cc.UpdateAnimator();            // updates the Animator Parameters
+            JumpStopHandle();
+            if (isJumpStop)
+            {
+                rigidbodyComponent.position = prevPos;
+                rigidbodyComponent.velocity = Vector3.zero;
+            }
+            else
+            {
+                MoveInput();
+                JumpInput();
+
+                cc.UpdateAnimator();            // updates the Animator Parameters
+            }
+            CameraInput();
 
             // Switch Dimension
             if (Input.GetKeyDown(KeyCode.Q) && dimManager.CanSwitchDimension)
@@ -51,9 +79,79 @@ namespace Invector.vCharacterController
             }
         }
 
+        private void LateUpdate()
+        {
+            if (isJumpStop)
+            {
+                transform.rotation = prevRotation;
+            }
+
+            //UI 활성화 처리
+            if (dimManager.Is2D)
+            {
+                plane.SetActive(false);
+            }
+            else
+            {
+                plane.SetActive(isJumpStop);
+            }
+            playerUI.SetActive(isJumpStop);
+        }
+
         public virtual void OnAnimatorMove()
         {
             cc.ControlAnimatorRootMotion(); // handle root motion animations 
+        }
+
+        private void JumpStopHandle()
+        {
+            if (Input.GetKeyDown(jumpInput) && cc.isGrounded == false)
+            {
+                Debug.Log("점프 중에 추가 점프 입력");
+                if (isJumpStop)
+                {
+                    JumpStopActivate(false);
+                }
+                else
+                {
+                    JumpStopActivate(true);
+                }
+            }
+
+            //바닥에 닿아있는 상태에서는 점프 정지 자동 해제
+            if(cc.isGrounded && isJumpStop)
+            {
+                JumpStopActivate(false);
+            }
+        }
+
+        private void JumpStopActivate(bool isActivate)
+        {
+            if(isActivate)
+            {
+                prevVelocity = rigidbodyComponent.velocity;
+                prevPos = rigidbodyComponent.position;
+                prevRotation = transform.rotation;
+                rigidbodyComponent.velocity = Vector3.zero;
+                rigidbodyComponent.useGravity = false;
+
+                animator.speed = 0f;
+
+                isJumpStop = true;
+            }
+            else
+            {
+                if(dimManager.Is2D)
+                {
+                    prevVelocity.z = 0f;
+                }
+                rigidbodyComponent.velocity = prevVelocity;
+                rigidbodyComponent.useGravity = true;
+
+                animator.speed = 1f;
+
+                isJumpStop = false;
+            }
         }
 
         #region Basic Locomotion Inputs
