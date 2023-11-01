@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SceneLoader))]
 public class Goal : MonoBehaviour
 {
-    [SerializeField]
     private SceneLoader sceneLoader;
+
+    private void Awake()
+    {
+        sceneLoader = GetComponent<SceneLoader>();
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
