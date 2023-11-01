@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1437680274467047115}
   - component: {fileID: 8953856656311668014}
   - component: {fileID: 7678334342353552140}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: CheckPointCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
