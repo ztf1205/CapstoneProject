@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class ResizableObject : MonoBehaviour
 {
+    private BoxCollider boxCollider;
+    private Vector3 originalSize;
+
+    private void Awake()
+    {
+        boxCollider = GetComponent<BoxCollider>();
+        originalSize = boxCollider.size;
+    }
+
     private void Start()
     {
         EventManager.Subscribe("ResizeCollider", ResizeCollider);
@@ -12,14 +21,12 @@ public class ResizableObject : MonoBehaviour
 
     private void ResizeCollider()
     {
-        BoxCollider boxCollider = GetComponent<BoxCollider>();
-        boxCollider.size = new Vector3(1f, 1f, 20f);
+        boxCollider.size = new Vector3(originalSize.x, originalSize.y, 999999f);
     }
 
     private void ResetCollider()
     {
-        BoxCollider boxCollider = GetComponent<BoxCollider>();
-        boxCollider.size = new Vector3(1f, 1f, 1f);
+        boxCollider.size = originalSize;
     }
 
     private void OnDestroy()

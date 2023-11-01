@@ -7,6 +7,9 @@ public class ZRaycaster : MonoBehaviour
 {
     private DimensionManager dimManager;
 
+    [SerializeField]
+    private LayerMask layerMask;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,12 +24,10 @@ public class ZRaycaster : MonoBehaviour
 
     private void CheckDimensionSwitchAvailability()
     {
-        // Raycast 무시할 레이어
-        int layerMask = ~(1 << LayerMask.NameToLayer("Ignore Raycast"));
-
         // Ray 발사 위치
         Vector3 pos = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z - 20f);
-        //Debug.DrawRay(pos, Vector3.forward*40f, Color.red);
+        
+        Debug.DrawRay(pos, Vector3.forward*40f, Color.red);
 
         if (Physics.Raycast(pos, Vector3.forward, out RaycastHit hit, 40.0f, layerMask))
         {

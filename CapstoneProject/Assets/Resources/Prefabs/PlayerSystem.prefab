@@ -241,7 +241,7 @@ MonoBehaviour:
   smoothCameraRotation: 12
   cullingLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 64
   lockCamera: 0
   rightOffset: 0
   defaultDistance: 2.5
@@ -311,7 +311,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   EffectFlags:
     components: []
-  sharedInstanceID: 9d9785d7-2948-477a-ac54-25497eaa234c
+  sharedInstanceID: 6337517d-fa1a-4958-8c84-c8e1d17721cc
 --- !u!1 &1987866228556544211
 GameObject:
   m_ObjectHideFlags: 0
@@ -3272,7 +3272,7 @@ MonoBehaviour:
   limitFallVelocity: -15
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 64
   groundMinDistance: 0.25
   groundMaxDistance: 0.5
   slopeLimit: 75
@@ -3322,6 +3322,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621ab44b16d572444bf60261e886a949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &3524703417992239235
 GameObject:
   m_ObjectHideFlags: 0
