@@ -15,6 +15,7 @@ public class TestCount : MonoBehaviour
             if (cubeCount < UImanager.maxCube)
             {
                 cubeCount++;
+                other.gameObject.SetActive(false);
                 UImanager.IncreaseCubeCount(cubeCount);
             }
         }
@@ -23,6 +24,7 @@ public class TestCount : MonoBehaviour
             if (crystalCount < UImanager.maxCrystal)
             {
                 crystalCount++;
+                other.gameObject.SetActive(false);
                 UImanager.IncreaseCrystalCount(crystalCount);
             }
         }
