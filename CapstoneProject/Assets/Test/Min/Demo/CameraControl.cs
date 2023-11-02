@@ -1,18 +1,15 @@
-using DG.Tweening;
-using Invector.vCharacterController;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using TMPro;
+using DG.Tweening;
 
-public class DetectCollision : MonoBehaviour
+public class CameraControl : MonoBehaviour
 {
     [SerializeField] private Camera camera;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Trigger")
+        if (other.gameObject.CompareTag("Player"))
         {
             TwoDimensionCamera td = camera.GetComponent<TwoDimensionCamera>();
 
@@ -20,8 +17,6 @@ public class DetectCollision : MonoBehaviour
                 td.ResetCamera();
             else
                 td.MoveCamera();
-
         }
     }
-
 }
