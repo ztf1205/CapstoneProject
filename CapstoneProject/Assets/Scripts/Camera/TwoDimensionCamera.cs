@@ -13,7 +13,7 @@ public class TwoDimensionCamera : MonoBehaviour
 
     private void Start()
     {
-        Init();
+        //Init();
     }
 
     private void Init()
@@ -24,11 +24,11 @@ public class TwoDimensionCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!flag)
-        {
-            Vector3 targetPosition = new Vector3(target.position.x, transform.position.y, transform.position.z) + offset;
-            transform.position = targetPosition;
-        }
+        //if (!flag)
+        //{
+        //    Vector3 targetPosition = new Vector3(target.position.x, transform.position.y, transform.position.z) + offset;
+        //    transform.position = targetPosition;
+        //}
     }
 
     public void MoveCamera()
