@@ -26,9 +26,8 @@ namespace Invector.vCharacterController
 
         private Rigidbody rigidbodyComponent;
         private Vector3 prevVelocity;
-        private Vector3 prevPos;
         private Quaternion prevRotation;
-        private bool isJumpStop = false;
+        private bool isMoveStop = false;
         private Animator animator;
 
         [HorizontalLine, SerializeField]
@@ -46,6 +45,8 @@ namespace Invector.vCharacterController
 
             rigidbodyComponent = GetComponent<Rigidbody>();
             animator = GetComponent<Animator>();
+
+            CursorActivate(false);
         }
 
         protected virtual void FixedUpdate()
@@ -57,13 +58,8 @@ namespace Invector.vCharacterController
 
         protected virtual void Update()
         {
-            JumpStopHandle();
-            if (isJumpStop)
-            {
-                rigidbodyComponent.position = prevPos;
-                rigidbodyComponent.velocity = Vector3.zero;
-            }
-            else
+            MoveStopHandle();
+            if (isMoveStop == false)
             {
                 MoveInput();
                 JumpInput();
@@ -73,29 +69,37 @@ namespace Invector.vCharacterController
             CameraInput();
 
             // Switch Dimension
-            if (Input.GetKeyDown(KeyCode.Q) && dimManager.CanSwitchDimension)
+            if (Input.GetKeyDown(KeyCode.Mouse0) && dimManager.CanSwitchDimension)
             {
                 dimManager.SwitchDimension();
             }
+
+            // 마우스 커서 표시, 숨기기 처리
+            CursorHandle();
         }
 
         private void LateUpdate()
         {
-            if (isJumpStop)
+            if (isMoveStop)
             {
                 transform.rotation = prevRotation;
             }
 
-            //UI 활성화 처리
+            // UI 활성화 처리
             if (dimManager.Is2D)
             {
                 plane.SetActive(false);
             }
             else
             {
-                plane.SetActive(isJumpStop);
+                plane.SetActive(isMoveStop);
             }
-            playerUI.SetActive(isJumpStop);
+            playerUI.SetActive(isMoveStop);
+        }
+
+        private void OnDestroy()
+        {
+            CursorActivate(true);
         }
 
         public virtual void OnAnimatorMove()
@@ -103,41 +107,61 @@ namespace Invector.vCharacterController
             cc.ControlAnimatorRootMotion(); // handle root motion animations 
         }
 
-        private void JumpStopHandle()
+        private void CursorHandle()
         {
-            if (Input.GetKeyDown(jumpInput) && cc.isGrounded == false)
+            // 게임 중에 ESC 키를 누르면 마우스 커서를 풀어줍니다.
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Debug.Log("점프 중에 추가 점프 입력");
-                if (isJumpStop)
-                {
-                    JumpStopActivate(false);
-                }
-                else
-                {
-                    JumpStopActivate(true);
-                }
+                CursorActivate(true);
             }
 
-            //바닥에 닿아있는 상태에서는 점프 정지 자동 해제
-            if(cc.isGrounded && isJumpStop)
+            // 입력이 들어오면 숨기기
+            if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
             {
-                JumpStopActivate(false);
+                CursorActivate(false);
             }
         }
 
-        private void JumpStopActivate(bool isActivate)
+        private void CursorActivate(bool isActivate)
+        {
+            if(isActivate)
+            {
+                // 커서 보여주고 움직이게 해주기
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                // 마우스 커서를 숨기고 보이지 않도록 설정
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+
+        private void MoveStopHandle()
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                MoveStopActivate(true);
+            }
+
+            if (Input.GetKeyUp(KeyCode.Mouse1))
+            {
+                MoveStopActivate(false);
+            }
+        }
+
+        private void MoveStopActivate(bool isActivate)
         {
             if(isActivate)
             {
                 prevVelocity = rigidbodyComponent.velocity;
-                prevPos = rigidbodyComponent.position;
                 prevRotation = transform.rotation;
                 rigidbodyComponent.velocity = Vector3.zero;
-                rigidbodyComponent.useGravity = false;
 
                 animator.speed = 0f;
 
-                isJumpStop = true;
+                isMoveStop = true;
             }
             else
             {
@@ -146,12 +170,12 @@ namespace Invector.vCharacterController
                     prevVelocity.z = 0f;
                 }
                 rigidbodyComponent.velocity = prevVelocity;
-                rigidbodyComponent.useGravity = true;
 
                 animator.speed = 1f;
 
-                isJumpStop = false;
+                isMoveStop = false;
             }
+            rigidbodyComponent.isKinematic = isMoveStop;
         }
 
         #region Basic Locomotion Inputs
@@ -206,7 +230,7 @@ namespace Invector.vCharacterController
                 }
             }
 
-            if (cameraMain)
+            if (cameraMain && isMoveStop == false)
             {
                 cc.UpdateMoveDirection(cameraMain.transform);
             }
