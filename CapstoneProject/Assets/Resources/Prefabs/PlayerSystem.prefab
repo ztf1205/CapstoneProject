@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 1554073555861305865}
   - component: {fileID: 622017124886023456}
   - component: {fileID: 1617377665}
+  - component: {fileID: -4383601856268408352}
   m_Layer: 0
   m_Name: ThirdPersonCamera_LITE
   m_TagString: MainCamera
@@ -351,6 +352,19 @@ MonoBehaviour:
     refractionDownsample: 1
     generateFoam: 1
     foamDownsample: 1
+--- !u!114 &-4383601856268408352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554073555861305866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1 &1987866228556544211
 GameObject:
   m_ObjectHideFlags: 0
@@ -7743,6 +7757,7 @@ GameObject:
   - component: {fileID: 3524703420134329125}
   - component: {fileID: 6091481682996077610}
   - component: {fileID: 634589026}
+  - component: {fileID: -3387092487247532936}
   m_Layer: 0
   m_Name: 2D Camera
   m_TagString: MainCamera
@@ -7923,6 +7938,19 @@ MonoBehaviour:
     refractionDownsample: 1
     generateFoam: 1
     foamDownsample: 1
+--- !u!114 &-3387092487247532936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3524703420134329121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1 &4514543398828519173
 GameObject:
   m_ObjectHideFlags: 0
