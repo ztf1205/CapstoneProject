@@ -164,7 +164,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554073555861305866}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -313,7 +313,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   EffectFlags:
     components: []
-  sharedInstanceID: 44543f4a-5f7f-405a-a405-895afe3deafb
+  sharedInstanceID: a95476d5-07ec-4e0f-88d6-9d7636b5a486
 --- !u!114 &1617377665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3195,8 +3195,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3524703417992239233}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -4.03, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3204,7 +3204,7 @@ Transform:
   - {fileID: 3524703417992725713}
   m_Father: {fileID: 2864967387487717067}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!95 &3524703418001730055
 Animator:
   serializedVersion: 5
@@ -7772,14 +7772,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3524703420134329121}
-  m_LocalRotation: {x: -0, y: -0.71256393, z: -0, w: 0.7016072}
-  m_LocalPosition: {x: 10.07, y: 1.51, z: 4.91}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.5, y: 3.7, z: -51.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2864967387487717067}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90.888, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &3524703420134329123
 Camera:
   m_ObjectHideFlags: 0
@@ -7787,7 +7787,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3524703420134329121}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -7899,7 +7899,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   EffectFlags:
     components: []
-  sharedInstanceID: eb37733e-89a3-4f22-b9a9-a41ceca87385
+  sharedInstanceID: fd360ad2-f56a-4097-b2b0-fa4d7b8414b9
 --- !u!114 &634589026
 MonoBehaviour:
   m_ObjectHideFlags: 0

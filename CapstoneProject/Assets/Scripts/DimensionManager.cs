@@ -1,3 +1,4 @@
+using cakeslice;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class DimensionManager : MonoBehaviour
     [SerializeField] private Camera threeDimensionCam;
     [SerializeField] private Camera twoDimensionCam;
 
-    public bool Is2D { get; set; } = false;
+    public bool Is2D { get; set; } = true;
     private bool canSwitchDimension;
     public bool CanSwitchDimension
     {
@@ -27,7 +28,7 @@ public class DimensionManager : MonoBehaviour
 
     private void Init()
     {
-        SwitchCamera();
+        SwitchDimension();
     }
 
     public void SwitchDimension()
@@ -35,6 +36,7 @@ public class DimensionManager : MonoBehaviour
         Is2D = !Is2D;
         SwitchCamera();
         ResizeColliders();
+        SetOutlineEffect();
     }
 
     private void SwitchCamera()
@@ -47,5 +49,23 @@ public class DimensionManager : MonoBehaviour
     {
         string eventName = Is2D ? "ResizeCollider" : "ResetCollider";
         EventManager.TriggerEvent(eventName);
+    }
+
+    private void SetOutlineEffect()
+    {
+        if (Is2D)
+        {
+            OutlineEffect outlineEffect = threeDimensionCam.gameObject.GetComponent<OutlineEffect>();
+            if (outlineEffect != null)
+                DestroyImmediate(outlineEffect);
+            twoDimensionCam.gameObject.AddComponent<OutlineEffect>();
+        }
+        else
+        {
+            OutlineEffect outlineEffect = twoDimensionCam.gameObject.GetComponent<OutlineEffect>();
+            if (outlineEffect != null)
+                DestroyImmediate(outlineEffect);
+            threeDimensionCam.gameObject.AddComponent<OutlineEffect>();
+        }
     }
 }
