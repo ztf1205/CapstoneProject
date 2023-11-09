@@ -29,6 +29,7 @@ namespace Invector.vCharacterController
         private Quaternion prevRotation;
         private bool isMoveStop = false;
         private Animator animator;
+        private bool isCollisionCheckState = false;
 
         [HorizontalLine, SerializeField]
         private GameObject plane;
@@ -68,11 +69,8 @@ namespace Invector.vCharacterController
             }
             CameraInput();
 
-            // Switch Dimension
-            if (Input.GetKeyDown(KeyCode.Mouse0) && dimManager.CanSwitchDimension)
-            {
-                dimManager.SwitchDimension();
-            }
+            // 2d, 3d 전환 처리
+            SwitchDimensionHandle();
 
             // 마우스 커서 표시, 숨기기 처리
             CursorHandle();
@@ -105,6 +103,30 @@ namespace Invector.vCharacterController
         public virtual void OnAnimatorMove()
         {
             cc.ControlAnimatorRootMotion(); // handle root motion animations 
+        }
+
+        private void SwitchDimensionHandle()
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                if (isCollisionCheckState)
+                {
+                    isCollisionCheckState = false;
+                    if (Input.GetKey(KeyCode.Mouse1) == false)
+                    {
+                        MoveStopActivate(false);
+                    }
+                }
+                else
+                {
+                    if (dimManager.CanSwitchDimension == false)
+                    {
+                        MoveStopActivate(true);
+                        isCollisionCheckState = true;
+                    }
+                }
+                dimManager.SwitchDimension();
+            }
         }
 
         private void CursorHandle()
@@ -145,7 +167,7 @@ namespace Invector.vCharacterController
                 MoveStopActivate(true);
             }
 
-            if (Input.GetKeyUp(KeyCode.Mouse1))
+            if (Input.GetKeyUp(KeyCode.Mouse1) && isCollisionCheckState == false)
             {
                 MoveStopActivate(false);
             }

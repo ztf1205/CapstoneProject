@@ -7,6 +7,7 @@ public class DimensionManager : MonoBehaviour
 {
     [SerializeField] private Camera threeDimensionCam;
     [SerializeField] private Camera twoDimensionCam;
+    [SerializeField] private Camera twoDimensionPlayerCollisionCam;
 
     public bool Is2D { get; set; } = true;
     private bool canSwitchDimension;
@@ -42,6 +43,12 @@ public class DimensionManager : MonoBehaviour
     private void SwitchCamera()
     {
         twoDimensionCam.enabled = Is2D;
+        twoDimensionPlayerCollisionCam.enabled = Is2D;
+        if (CanSwitchDimension)
+        {
+            twoDimensionPlayerCollisionCam.enabled = false;
+        }
+
         threeDimensionCam.enabled = !Is2D;
     }
 
