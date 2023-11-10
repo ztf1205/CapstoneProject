@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class DimensionManager : MonoBehaviour
 {
-    [SerializeField] private Camera threeDimensionCam;
-    [SerializeField] private Camera twoDimensionCam;
-    [SerializeField] private Camera twoDimensionPlayerCollisionCam;
+    public GameObject threeDimensionCam;
+    public GameObject twoDimensionCam;
+    public GameObject twoDimensionPlayerCollisionCam;
+    public GameObject cinematicCam;
 
-    public bool Is2D { get; set; } = true;
+    public bool Is2D { get; set; } = false;
     private bool canSwitchDimension;
     public bool CanSwitchDimension
     {
@@ -29,27 +30,35 @@ public class DimensionManager : MonoBehaviour
 
     private void Init()
     {
-        SwitchDimension();
-    }
-
-    public void SwitchDimension()
-    {
-        Is2D = !Is2D;
         SwitchCamera();
         ResizeColliders();
         SetOutlineEffect();
     }
 
-    private void SwitchCamera()
+    public void SwitchDimension()
     {
-        twoDimensionCam.enabled = Is2D;
-        twoDimensionPlayerCollisionCam.enabled = Is2D;
+        Is2D = !Is2D;
+        ResizeColliders();
+        SetOutlineEffect();
+        cinematicCam.GetComponent<CinematicCamera>().CameraDirection();
+
+
+        TwoDimensionPlayerCollisionCamHandle();
+    }
+
+    private void TwoDimensionPlayerCollisionCamHandle()
+    {
+        twoDimensionPlayerCollisionCam.GetComponent<Camera>().enabled = Is2D;
         if (CanSwitchDimension)
         {
-            twoDimensionPlayerCollisionCam.enabled = false;
+            twoDimensionPlayerCollisionCam.GetComponent<Camera>().enabled = false;
         }
+    }
 
-        threeDimensionCam.enabled = !Is2D;
+    private void SwitchCamera()
+    {
+        twoDimensionCam.GetComponent<Camera>().enabled = Is2D;
+        threeDimensionCam.GetComponent<Camera>().enabled = !Is2D;
     }
 
     private void ResizeColliders()
@@ -62,17 +71,17 @@ public class DimensionManager : MonoBehaviour
     {
         if (Is2D)
         {
-            OutlineEffect outlineEffect = threeDimensionCam.gameObject.GetComponent<OutlineEffect>();
+            OutlineEffect outlineEffect = threeDimensionCam.GetComponent<OutlineEffect>();
             if (outlineEffect != null)
                 DestroyImmediate(outlineEffect);
-            twoDimensionCam.gameObject.AddComponent<OutlineEffect>();
+            twoDimensionCam.AddComponent<OutlineEffect>();
         }
         else
         {
-            OutlineEffect outlineEffect = twoDimensionCam.gameObject.GetComponent<OutlineEffect>();
+            OutlineEffect outlineEffect = twoDimensionCam.GetComponent<OutlineEffect>();
             if (outlineEffect != null)
                 DestroyImmediate(outlineEffect);
-            threeDimensionCam.gameObject.AddComponent<OutlineEffect>();
+            threeDimensionCam.AddComponent<OutlineEffect>();
         }
     }
 }
