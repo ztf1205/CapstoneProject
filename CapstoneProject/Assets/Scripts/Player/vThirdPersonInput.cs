@@ -1,5 +1,6 @@
 using UnityEngine;
 using NaughtyAttributes;
+using UnityEditor.Build;
 
 namespace Invector.vCharacterController
 {
@@ -84,15 +85,15 @@ namespace Invector.vCharacterController
             }
 
             // UI 활성화 처리
-            if (dimManager.Is2D)
-            {
-                plane.SetActive(false);
-            }
-            else
-            {
-                plane.SetActive(isMoveStop);
-            }
-            playerUI.SetActive(isMoveStop);
+            //if (dimManager.Is2D)
+            //{
+            //    plane.SetActive(false);
+            //}
+            //else
+            //{
+            //    plane.SetActive(isMoveStop);
+            //}
+            //playerUI.SetActive(isMoveStop);
         }
 
         private void OnDestroy()
@@ -165,15 +166,30 @@ namespace Invector.vCharacterController
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 MoveStopActivate(true);
+                SetActiveUI(true);
             }
 
             if (Input.GetKeyUp(KeyCode.Mouse1) && isCollisionCheckState == false)
             {
                 MoveStopActivate(false);
+                SetActiveUI(false);
             }
         }
 
-        private void MoveStopActivate(bool isActivate)
+        private void SetActiveUI(bool isActive)
+        {
+            if (dimManager.Is2D)
+            {
+                plane.SetActive(false);
+            }
+            else
+            {
+                plane.SetActive(isActive);
+            }
+            playerUI.SetActive(isActive);
+        }
+
+        public void MoveStopActivate(bool isActivate)
         {
             if(isActivate)
             {

@@ -4,6 +4,8 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using System.Runtime.CompilerServices;
+using Invector.vCharacterController;
 
 public class CinematicCamera : MonoBehaviour
 {
@@ -12,21 +14,26 @@ public class CinematicCamera : MonoBehaviour
     private Camera threeDimensionCam;
     private Camera twoDimensionCam;
 
+    // dolly zoom 관련 변수
     [SerializeField] private Transform target; // player
     private float initHeightAtDist;
     private bool dzEnabled = false;
 
-    [SerializeField] private float zoomSpeed = 150f; // Dolly Zoom 스피드
-    [SerializeField] private float duration = 0.3f; // DOTween용 duration
+    private float lerpSpeed = 3f; // Lerp, Slerp 스피드
+    private float zoomSpeed = 200f; // Dolly Zoom 스피드
+    private float duration = 0.5f; // DOTween
 
-    private float fovLowerLimit = 3f;
+    // 3D->2D 차원 전환 중 dolly zoom 직전 카메라 위치 관련 변수
+    private float dy = 1f;
+    private float dz = -8.5f;
+
+    // field of view
+    private float fovLowerLimit = 2f;
     private float fovUpperLimit = 60f;
 
     void Start()
     {
         Init();
-        EventManager.Subscribe("AlignWith2DCamera", AlignWith2DCamera);
-        EventManager.Subscribe("AlignWith3DCamera", AlignWith3DCamera);
     }
 
     private void Init()
@@ -37,48 +44,88 @@ public class CinematicCamera : MonoBehaviour
         twoDimensionCam = dimManager.twoDimensionCam.GetComponent<Camera>();
 
         cam.fieldOfView = fovUpperLimit;
+        cam.orthographicSize = twoDimensionCam.orthographicSize;
     }
-
 
     private void Update()
     {
         if (dzEnabled)
             DollyZoom();
     }
-    
+
     private void DollyZoom()
     {
         // 3D -> 2D
         if (dimManager.Is2D)
         {
-            var currDistance = Vector3.Distance(transform.position, target.position);
-            cam.fieldOfView = ComputeFieldOfView(initHeightAtDist, currDistance);
-            transform.Translate(-Vector3.forward * Time.deltaTime * zoomSpeed);
-            if (cam.fieldOfView <= fovLowerLimit)
-            {
-                dzEnabled = false;
-                cam.orthographic = true;
-                EventManager.TriggerEvent("AlignWith2DCamera");
-            }
+            DollyZoomOut();
         }
+
         // 2D -> 3D
         else
         {
-            cam.orthographic = false;
-            var currDistance = Vector3.Distance(transform.position, target.position);
-            cam.fieldOfView = ComputeFieldOfView(initHeightAtDist, currDistance);
-            transform.Translate(Vector3.forward * Time.deltaTime * zoomSpeed);
-            if (cam.fieldOfView >= fovUpperLimit)
-            {
-                dzEnabled = false;
-                EventManager.TriggerEvent("AlignWith3DCamera");
-            }
+            DollyZoomIn();
         }
     }
 
+    private void DollyZoomOut()
+    {
+        var currDistance = Vector3.Distance(transform.position, target.position);
+        cam.fieldOfView = ComputeFieldOfView(initHeightAtDist, currDistance);
+
+        // Lerp for position
+        Vector3 targetPos = new Vector3(twoDimensionCam.transform.position.x, twoDimensionCam.transform.position.y, transform.position.z);
+        transform.position = Vector3.Lerp(transform.position, targetPos, lerpSpeed * Time.deltaTime);
+        transform.Translate(-(Vector3.forward) * zoomSpeed * Time.deltaTime);
+        // Slerp for rotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, twoDimensionCam.transform.rotation, lerpSpeed * Time.deltaTime);
+
+        if (cam.fieldOfView <= fovLowerLimit)
+        {
+            dzEnabled = false;
+            cam.orthographic = true;
+            cam.enabled = false;
+            twoDimensionCam.enabled = true;
+
+            var input = target.gameObject.GetComponent<vThirdPersonInput>();
+            input.MoveStopActivate(false);
+        }
+    }
+
+    private void DollyZoomIn()
+    {
+        dzEnabled = false;
+
+        Vector3 targetPos = new Vector3(target.position.x, target.position.y + dy, target.position.z + dz);
+        transform.DOMove(targetPos, duration)
+            .OnUpdate(() =>
+            {
+                var currDistance = Vector3.Distance(transform.position, target.position);
+                cam.fieldOfView = ComputeFieldOfView(initHeightAtDist, currDistance);
+                if (cam.fieldOfView >= fovUpperLimit)
+                    AlignWith3DCamera();
+            });
+    }
+
+    private void AlignWith3DCamera()
+    {
+        transform.DOMove(threeDimensionCam.transform.position, duration).SetEase(Ease.InOutSine);
+        transform.DORotateQuaternion(threeDimensionCam.transform.rotation, duration).SetEase(Ease.InOutSine)
+            .OnComplete(() =>
+            {
+                cam.enabled = false;
+                threeDimensionCam.enabled = true;
+
+                var input = target.gameObject.GetComponent<vThirdPersonInput>();
+                input.MoveStopActivate(false);
+            });
+    }
 
     public void CameraDirection()
     {
+        var input = target.gameObject.GetComponent<vThirdPersonInput>();
+        input.MoveStopActivate(true);
+
         // 3D -> 2D
         if (dimManager.Is2D)
         {
@@ -88,39 +135,35 @@ public class CinematicCamera : MonoBehaviour
             cam.transform.rotation = threeDimensionCam.transform.rotation;
             cam.enabled = true;
 
-            // Cinematic 카메라 이동 및 회전 (dolly zoom 준비)
-            Vector3 targetPos = new Vector3(target.position.x, target.position.y + 1f, target.position.z - 8.5f);
+            // Cinematic 카메라 이동 및 회전
+            Vector3 targetPos = new Vector3(target.position.x, target.position.y + dy, target.position.z + dz);
             transform.DOMove(targetPos, duration);
             Vector3 targetRot = new Vector3(0f, 0f, transform.eulerAngles.z);
             transform.DORotate(targetRot, duration)
                 .OnComplete(() =>
                 {
-                    // dolly zoom
-                    float initDistance = Vector3.Distance(targetPos, target.position);
+                    // dolly zoom 시작 준비
+                    float initDistance = Vector3.Distance(transform.position, target.position);
                     initHeightAtDist = ComputeFrustumHeight(initDistance);
                     dzEnabled = true;
                 });
-            
         }
+
         // 2D -> 3D
         else
         {
             // 2D 카메라 비활성화
             twoDimensionCam.enabled = false;
-            cam.transform.position = twoDimensionCam.transform.position;
-            cam.fieldOfView = 13; // temp
+            cam.transform.position = new Vector3(twoDimensionCam.transform.position.x, twoDimensionCam.transform.position.y, transform.position.z);
+            cam.transform.rotation = twoDimensionCam.transform.rotation;
+            cam.orthographic = false;
             cam.enabled = true;
 
-            // Cinematic 카메라 이동 및 회전 (dolly zoom 준비)
-            Vector3 targetPos = new Vector3(target.position.x, target.position.y + 1f, target.position.z - 150f);
-            transform.DOMove(targetPos, duration);
-
+            // dolly zoom 시작 준비
             float initDistance = Vector3.Distance(transform.position, target.position);
             initHeightAtDist = ComputeFrustumHeight(initDistance);
             dzEnabled = true;
         }
-
-        
     }
 
     // Calculate the frustum height at a given distance from the camera
@@ -133,27 +176,5 @@ public class CinematicCamera : MonoBehaviour
     private float ComputeFieldOfView(float height, float distance)
     {
         return 2.0f * Mathf.Atan(height * 0.5f / distance) * Mathf.Rad2Deg;
-    }
-
-    private void AlignWith2DCamera()
-    {
-        // Ortho도 필요할 예정
-        transform.DOMove(twoDimensionCam.transform.position, duration).SetEase(Ease.InOutSine)
-            .OnComplete(() =>
-            {
-                cam.enabled = false;
-                twoDimensionCam.enabled = true;
-            });
-    }
-
-    private void AlignWith3DCamera()
-    {
-        transform.DOMove(threeDimensionCam.transform.position, duration).SetEase(Ease.InOutSine);
-        transform.DORotateQuaternion(threeDimensionCam.transform.rotation, 0.3f).SetEase(Ease.InOutSine)
-            .OnComplete(() =>
-            {
-                cam.enabled = false;
-                threeDimensionCam.enabled = true;
-            });
     }
 }
