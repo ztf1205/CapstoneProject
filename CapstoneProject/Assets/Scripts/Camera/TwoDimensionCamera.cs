@@ -3,55 +3,66 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System.Runtime.CompilerServices;
+using UnityEditor;
 
 public class TwoDimensionCamera : MonoBehaviour
 {
-    private Transform target;
-    [SerializeField] Vector3 offset;
+    private Transform player;
+    [SerializeField] private Vector2 cameraOffset;
+    private Vector3 camPos;
+    private float dz = 20;
 
-    public bool flag = false;
+    private Camera cam;
+    public float DefaultOrthoSize { get; private set; } = 5f;
+    public float CurOrthoSize { get; private set; }
+
+    public bool IsFollowingPlayer { get; set; } = true;
+    private float pascalOrthoSize = 10f;
 
     private void Start()
     {
-        //Init();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        camPos.z = player.position.z - dz;
+
+        cam = GetComponent<Camera>();
+        CurOrthoSize = DefaultOrthoSize;
+        cam.orthographicSize = CurOrthoSize;
     }
 
-    private void Init()
+    private void FixedUpdate()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
-        transform.position = new Vector3(target.position.x, target.position.y, -80f);
-    }
-
-    private void LateUpdate()
-    {
-        //if (!flag)
-        //{
-        //    Vector3 targetPosition = new Vector3(target.position.x, transform.position.y, transform.position.z) + offset;
-        //    transform.position = targetPosition;
-        //}
-    }
-
-    public void MoveCamera()
-    {
-        flag = true;
-        float duration = 3f;
-        float targetX = -13f;
-        float targetSize = 10f;
-        transform.DOKill();
-        Camera.main.DOKill();
-        transform.DOMoveX(targetX, duration)
-        .OnUpdate(() =>
+        if (IsFollowingPlayer)
         {
-            Camera.main.DOOrthoSize(targetSize, duration);
-        });
+            CalculateCameraPosition();
+            transform.position = camPos;
+        }
+    }
+
+    private void CalculateCameraPosition()
+    {
+        camPos.x = player.position.x + cameraOffset.x;
+        camPos.y = player.position.y + cameraOffset.y;
+    }
+
+    public void PascalMoveCamera()
+    {
+        IsFollowingPlayer = false;
+
+        float duration = 1f;
+        Vector3 targetPos = new Vector3(-13f, transform.position.y - 3f, transform.position.z);
+        CurOrthoSize = pascalOrthoSize;
+;
+        transform.DOMove(targetPos, duration);
+        cam.DOOrthoSize(CurOrthoSize, duration);
     }
 
     public void ResetCamera()
     {
-        flag = false;
-        float targetSize = 5f;
-        float duration = 3f;
-        Camera.main.DOKill();
-        Camera.main.DOOrthoSize(targetSize, duration);
+        IsFollowingPlayer = true;
+
+        float duration = 1f;
+
+        CurOrthoSize = DefaultOrthoSize;
+        cam.DOOrthoSize(CurOrthoSize, duration);
     }
 }

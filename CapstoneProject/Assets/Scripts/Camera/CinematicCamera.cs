@@ -15,7 +15,7 @@ public class CinematicCamera : MonoBehaviour
     private Camera twoDimensionCam;
 
     // dolly zoom 관련 변수
-    [SerializeField] private Transform target; // player
+    private Transform target; // player
     private float initHeightAtDist;
     private bool dzEnabled = false;
 
@@ -38,13 +38,14 @@ public class CinematicCamera : MonoBehaviour
 
     private void Init()
     {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         dimManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
         cam = GetComponent<Camera>();
         threeDimensionCam = dimManager.threeDimensionCam.GetComponent<Camera>();
         twoDimensionCam = dimManager.twoDimensionCam.GetComponent<Camera>();
 
+        cam.orthographicSize = dimManager.twoDimensionCam.GetComponent<TwoDimensionCamera>().DefaultOrthoSize;
         cam.fieldOfView = fovUpperLimit;
-        cam.orthographicSize = twoDimensionCam.orthographicSize;
     }
 
     private void Update()
@@ -84,8 +85,17 @@ public class CinematicCamera : MonoBehaviour
         {
             dzEnabled = false;
             cam.orthographic = true;
-            cam.enabled = false;
-            twoDimensionCam.enabled = true;
+
+            // Orthographic size 
+            var td = twoDimensionCam.GetComponent<TwoDimensionCamera>();
+            float duration = 1f;
+
+            cam.DOOrthoSize(td.CurOrthoSize, duration)
+                .OnComplete(() =>
+                {
+                    cam.enabled = false;
+                    twoDimensionCam.enabled = true;
+                });
 
             var input = target.gameObject.GetComponent<vThirdPersonInput>();
             input.MoveStopActivate(false);

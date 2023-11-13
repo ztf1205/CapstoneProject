@@ -2,21 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEditor.Experimental.GraphView;
 
 public class CameraControl : MonoBehaviour
 {
-    [SerializeField] private Camera camera;
+    [SerializeField] private TwoDimensionCamera td;
+    [SerializeField] private bool isExit;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            TwoDimensionCamera td = camera.GetComponent<TwoDimensionCamera>();
+            float playerX = other.transform.position.x;
+            float triggerX = transform.position.x;
+            float direction = playerX - triggerX;
 
-            if (td.flag)
-                td.ResetCamera();
-            else
-                td.MoveCamera();
+            if (this.gameObject.name == "PascalTrigger")
+            {
+                if (!isExit)
+                {
+                    if (direction < 0)
+                        td.PascalMoveCamera();
+                    else
+                        td.ResetCamera();
+                }
+               else
+                {
+                    td.ResetCamera();
+                }
+            }
         }
     }
 }
