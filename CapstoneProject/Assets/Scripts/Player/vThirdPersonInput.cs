@@ -85,15 +85,15 @@ namespace Invector.vCharacterController
             }
 
             // UI 활성화 처리
-            //if (dimManager.Is2D)
-            //{
-            //    plane.SetActive(false);
-            //}
-            //else
-            //{
-            //    plane.SetActive(isMoveStop);
-            //}
-            //playerUI.SetActive(isMoveStop);
+            if (dimManager.Is2D)
+            {
+                plane.SetActive(false);
+            }
+            else
+            {
+                plane.SetActive(isMoveStop);
+            }
+            playerUI.SetActive(isMoveStop);
         }
 
         private void OnDestroy()
@@ -189,7 +189,7 @@ namespace Invector.vCharacterController
             playerUI.SetActive(isActive);
         }
 
-        public void MoveStopActivate(bool isActivate)
+        private void MoveStopActivate(bool isActivate)
         {
             if(isActivate)
             {

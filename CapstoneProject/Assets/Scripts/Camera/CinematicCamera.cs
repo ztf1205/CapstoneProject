@@ -98,7 +98,7 @@ public class CinematicCamera : MonoBehaviour
                 });
 
             var input = target.gameObject.GetComponent<vThirdPersonInput>();
-            input.MoveStopActivate(false);
+            //input.MoveStopActivate(false);
         }
     }
 
@@ -127,14 +127,14 @@ public class CinematicCamera : MonoBehaviour
                 threeDimensionCam.enabled = true;
 
                 var input = target.gameObject.GetComponent<vThirdPersonInput>();
-                input.MoveStopActivate(false);
+                //input.MoveStopActivate(false);
             });
     }
 
     public void CameraDirection()
     {
         var input = target.gameObject.GetComponent<vThirdPersonInput>();
-        input.MoveStopActivate(true);
+        //input.MoveStopActivate(true);
 
         // 3D -> 2D
         if (dimManager.Is2D)
