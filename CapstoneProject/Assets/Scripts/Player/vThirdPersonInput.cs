@@ -108,25 +108,29 @@ namespace Invector.vCharacterController
 
         private void SwitchDimensionHandle()
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            // 돌리 줌 모드가 아니면
+            if (!dimManager.IsDollyZoomMode)
             {
-                if (isCollisionCheckState)
+                if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    isCollisionCheckState = false;
-                    if (Input.GetKey(KeyCode.Mouse1) == false)
+                    if (isCollisionCheckState)
                     {
-                        MoveStopActivate(false);
+                        isCollisionCheckState = false;
+                        if (Input.GetKey(KeyCode.Mouse1) == false)
+                        {
+                            MoveStopActivate(false);
+                        }
                     }
-                }
-                else
-                {
-                    if (dimManager.CanSwitchDimension == false)
+                    else
                     {
-                        MoveStopActivate(true);
-                        isCollisionCheckState = true;
+                        if (dimManager.CanSwitchDimension == false)
+                        {
+                            MoveStopActivate(true);
+                            isCollisionCheckState = true;
+                        }
                     }
+                    dimManager.SwitchDimension();
                 }
-                dimManager.SwitchDimension();
             }
         }
 

@@ -86,16 +86,18 @@ public class CinematicCamera : MonoBehaviour
             dzEnabled = false;
             cam.orthographic = true;
 
-            // Orthographic size 
-            var td = twoDimensionCam.GetComponent<TwoDimensionCamera>();
-            float duration = 1f;
+            //// Orthographic size 
+            //var td = twoDimensionCam.GetComponent<TwoDimensionCamera>();
+            //float duration = 1f;
 
-            cam.DOOrthoSize(td.CurOrthoSize, duration)
-                .OnComplete(() =>
-                {
-                    cam.enabled = false;
-                    twoDimensionCam.enabled = true;
-                });
+            //cam.DOOrthoSize(td.CurOrthoSize, duration)
+            //    .OnComplete(() =>
+            //    {
+            //        cam.enabled = false;
+            //        twoDimensionCam.enabled = true;
+            //    });
+            cam.enabled = false;
+            twoDimensionCam.enabled = true;
 
             var input = target.gameObject.GetComponent<vThirdPersonInput>();
             //input.MoveStopActivate(false);

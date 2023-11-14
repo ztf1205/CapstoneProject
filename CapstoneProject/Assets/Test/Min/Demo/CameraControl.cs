@@ -28,7 +28,10 @@ public class CameraControl : MonoBehaviour
                 }
                else
                 {
-                    td.ResetCamera();
+                    if (direction < 0)
+                        td.ResetCamera();
+                    else
+                        td.PascalMoveCamera();
                 }
             }
         }
