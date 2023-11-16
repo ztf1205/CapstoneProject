@@ -13,6 +13,7 @@ public class DimensionSwitchPlatform : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        dimManager.SwitchDimension();
+        if (collision.gameObject .CompareTag("Player"))
+            dimManager.SwitchDimension();
     }
 }
