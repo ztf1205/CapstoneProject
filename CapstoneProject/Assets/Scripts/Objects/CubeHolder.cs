@@ -11,6 +11,7 @@ public class CubeHolder : SignalGenerator
         if (collision.gameObject.CompareTag("Player") && Cube.Count() > 0)
         {
             GeneratorActivate();
+            EventManager.TriggerEvent("CubP");
         }
     }
 
