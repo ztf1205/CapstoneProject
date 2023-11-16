@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7241240373733178081}
   - component: {fileID: 2672383332505066959}
   - component: {fileID: 7338714585066766634}
+  - component: {fileID: -8424569108830488911}
   m_Layer: 0
   m_Name: ActivatorCollider
   m_TagString: Untagged
@@ -60,3 +61,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetGameObjects: []
   setActive: 1
+--- !u!114 &-8424569108830488911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5566221615570041420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a377e22b8da33e49b541d2343e45c81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCollision2DEnabled: 1

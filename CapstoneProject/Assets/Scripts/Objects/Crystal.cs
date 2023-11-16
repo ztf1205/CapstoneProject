@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Crystal : MonoBehaviour
 {
-    public bool IsAcquired { get; private set; } = true;
+    public bool IsAcquired { get; private set; } = false;
     [SerializeField] private Transform crystalHolder;
 
     private void Start()
@@ -34,7 +34,6 @@ public class Crystal : MonoBehaviour
     private void ActivateCrystal()
     {
         gameObject.SetActive (true);
-        gameObject.GetComponent<Collider>().isTrigger = false;
     }
 
     private void OnDestroy()

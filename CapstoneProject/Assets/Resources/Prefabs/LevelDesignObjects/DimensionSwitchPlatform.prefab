@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8820162767521329052}
   - component: {fileID: 2141373640216308038}
   - component: {fileID: 2803288903038923587}
+  - component: {fileID: -363834671915021466}
   m_Layer: 0
   m_Name: DimensionSwitchPlatform
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3dea444cc5d429c4381990304bd727b9, type: 2}
+  - {fileID: 2100000, guid: edc5b842cce4d8441b8f71ab7876f065, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,3 +111,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99864fe4b32deb441a5bc4299c163a4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  switchWaitingTime: 1
+--- !u!114 &-363834671915021466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578939685644053879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a377e22b8da33e49b541d2343e45c81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCollision2DEnabled: 1

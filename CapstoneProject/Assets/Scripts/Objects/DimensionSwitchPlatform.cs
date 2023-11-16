@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DimensionSwitchPlatform : MonoBehaviour
 {
+    [SerializeField]
+    private float switchWaitingTime = 1f;
+
     private DimensionManager dimManager;
 
     private void Awake()
@@ -14,6 +17,21 @@ public class DimensionSwitchPlatform : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject .CompareTag("Player"))
-            dimManager.SwitchDimension();
+        {
+            Invoke("SwitchDimension", switchWaitingTime);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            CancelInvoke("SwitchDimension");
+        }
+    }
+
+    private void SwitchDimension()
+    {
+        dimManager.SwitchDimension();
     }
 }
