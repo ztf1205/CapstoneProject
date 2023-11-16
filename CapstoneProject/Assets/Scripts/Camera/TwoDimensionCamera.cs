@@ -10,7 +10,7 @@ public class TwoDimensionCamera : MonoBehaviour
     private Transform player;
     [SerializeField] private Vector2 cameraOffset;
     private Vector3 camPos;
-    private float dz = 20;
+    [SerializeField] private float dz = 4000f;
 
     private Camera cam;
     public float DefaultOrthoSize { get; private set; } = 5f;

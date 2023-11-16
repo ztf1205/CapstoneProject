@@ -8162,7 +8162,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.03
-  far clip plane: 300
+  far clip plane: 10000
   field of view: 60
   orthographic: 1
   orthographic size: 5
@@ -8201,7 +8201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2cc23cfe4436e643935788fe78b7c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraOffset: {x: 1, y: 2}
+  cameraOffset: {x: 0, y: 1}
+  dz: 4000
 --- !u!114 &6091481682996077610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8256,7 +8257,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   EffectFlags:
     components: []
-  sharedInstanceID: 4796318b-6294-4f08-9677-db57dc93d2cd
+  sharedInstanceID: 8c2a1f89-9710-49c1-9ad5-17972a1e3cb0
 --- !u!114 &634589026
 MonoBehaviour:
   m_ObjectHideFlags: 0
