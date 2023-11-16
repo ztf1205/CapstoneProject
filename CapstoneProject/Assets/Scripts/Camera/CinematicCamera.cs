@@ -99,8 +99,7 @@ public class CinematicCamera : MonoBehaviour
             cam.enabled = false;
             twoDimensionCam.enabled = true;
 
-            var input = target.gameObject.GetComponent<vThirdPersonInput>();
-            //input.MoveStopActivate(false);
+            EventManager.TriggerEvent("OnEndDollyZoom");
         }
     }
 
@@ -128,8 +127,7 @@ public class CinematicCamera : MonoBehaviour
                 cam.enabled = false;
                 threeDimensionCam.enabled = true;
 
-                var input = target.gameObject.GetComponent<vThirdPersonInput>();
-                //input.MoveStopActivate(false);
+                EventManager.TriggerEvent("OnEndDollyZoom");
             });
     }
 
