@@ -16,6 +16,7 @@ public class Cube : MonoBehaviour
         {
             IncreaseCount();
             gameObject.SetActive(false);
+            EventManager.TriggerEvent("GainCube");
         }
     }
 }

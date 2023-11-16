@@ -20,6 +20,7 @@ public class Crystal : MonoBehaviour
             crystalHolder.gameObject.GetComponent<CrystalHolder>().CanHoldCrystal = true;
             MoveCrystal();
             gameObject.SetActive(false);
+            EventManager.TriggerEvent("GainCrystal");
         }
     }
 
