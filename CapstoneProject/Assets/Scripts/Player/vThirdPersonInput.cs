@@ -31,6 +31,7 @@ namespace Invector.vCharacterController
         private bool isMoveStop = false;
         private Animator animator;
         private bool isCollisionCheckState = false;
+        private bool isDollyZoom = false;
 
         [HorizontalLine, SerializeField]
         private GameObject plane;
@@ -38,6 +39,12 @@ namespace Invector.vCharacterController
         private GameObject playerUI;
 
         #endregion
+
+        private void Awake()
+        {
+            EventManager.Subscribe("OnStartDollyZoom", OnStartDollyZoom);
+            EventManager.Subscribe("OnEndDollyZoom", OnEndDollyZoom);
+        }
 
         protected virtual void Start()
         {
@@ -85,6 +92,39 @@ namespace Invector.vCharacterController
             }
 
             // UI 활성화 처리
+            UIHandle();
+        }
+
+        private void OnDestroy()
+        {
+            CursorActivate(true);
+
+            EventManager.Unsubscribe("OnStartDollyZoom", OnStartDollyZoom);
+            EventManager.Unsubscribe("OnEndDollyZoom", OnEndDollyZoom);
+        }
+
+        public virtual void OnAnimatorMove()
+        {
+            cc.ControlAnimatorRootMotion(); // handle root motion animations 
+        }
+
+        private void OnStartDollyZoom()
+        {
+            isDollyZoom = true;
+            MoveStopActivate(true);
+        }
+
+        private void OnEndDollyZoom()
+        {
+            isDollyZoom = false;
+            if (Input.GetKey(KeyCode.Mouse1) == false)
+            {
+                MoveStopActivate(false);
+            }
+        }
+
+        private void UIHandle()
+        {
             if (dimManager.Is2D)
             {
                 plane.SetActive(false);
@@ -96,42 +136,46 @@ namespace Invector.vCharacterController
             playerUI.SetActive(isMoveStop);
         }
 
-        private void OnDestroy()
-        {
-            CursorActivate(true);
-        }
-
-        public virtual void OnAnimatorMove()
-        {
-            cc.ControlAnimatorRootMotion(); // handle root motion animations 
-        }
-
         private void SwitchDimensionHandle()
         {
+            if(isDollyZoom)
+            {
+                return;
+            }
+
             // 돌리 줌 모드가 아니면
             if (!dimManager.IsDollyZoomMode)
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    if (isCollisionCheckState)
-                    {
-                        isCollisionCheckState = false;
-                        if (Input.GetKey(KeyCode.Mouse1) == false)
-                        {
-                            MoveStopActivate(false);
-                        }
-                    }
-                    else
-                    {
-                        if (dimManager.CanSwitchDimension == false)
-                        {
-                            MoveStopActivate(true);
-                            isCollisionCheckState = true;
-                        }
-                    }
-                    dimManager.SwitchDimension();
+                    SwitchDimension();
                 }
             }
+            else
+            {
+
+            }
+        }
+
+        private void SwitchDimension()
+        {
+            if (isCollisionCheckState)
+            {
+                isCollisionCheckState = false;
+                if (Input.GetKey(KeyCode.Mouse1) == false)
+                {
+                    MoveStopActivate(false);
+                }
+            }
+            else
+            {
+                if (dimManager.CanSwitchDimension == false)
+                {
+                    MoveStopActivate(true);
+                    isCollisionCheckState = true;
+                }
+            }
+            dimManager.SwitchDimension();
         }
 
         private void CursorHandle()
