@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using NaughtyAttributes;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(SceneLoader))]
 public class Goal : MonoBehaviour
@@ -16,7 +18,16 @@ public class Goal : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            sceneLoader.LoadScene("GameClear");
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            if (currentSceneName == "5")
+            {
+                sceneLoader.LoadScene("GameClear");
+            }
+            else
+            {
+                int nextScene = int.Parse(currentSceneName) + 1;
+                sceneLoader.LoadScene(nextScene.ToString());
+            }
         }
     }
 }
