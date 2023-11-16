@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Crystal : MonoBehaviour
 {
-    private bool isAcquired = false;
+    public bool IsAcquired { get; private set; } = true;
     [SerializeField] private Transform crystalHolder;
 
     private void Start()
@@ -14,9 +14,9 @@ public class Crystal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && !isAcquired)
+        if (other.gameObject.CompareTag("Player") && !IsAcquired)
         {
-            isAcquired = true;
+            IsAcquired = true;
             crystalHolder.gameObject.GetComponent<CrystalHolder>().CanHoldCrystal = true;
             MoveCrystal();
             gameObject.SetActive(false);
