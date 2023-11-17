@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using FMODUnity;
 
 public class AudioManager : MonoBehaviour
 {
+    [field: Header("Gain Cube")]
+    [field: SerializeField] public EventReference cube { get; private set; }
+    [field: Header("Gain Crystal")]
+    [field: SerializeField] public EventReference crystal { get; private set; }
+
     private void Awake()
     {
         EventManager.Subscribe("GainCube", PlayCubeSound);
@@ -23,20 +28,20 @@ public class AudioManager : MonoBehaviour
 
     private void PlayCubeSound()
     {
-        Debug.Log("큐브 획득");
+        FMODUnity.RuntimeManager.PlayOneShot(cube, transform.position);
     }
 
     private void PlayCrystalSound()
     {
-        Debug.Log("크리스탈 획득");
+        FMODUnity.RuntimeManager.PlayOneShot(crystal, transform.position);
     }
 
     private void PlayCubePedestalSound()
     {
-        Debug.Log("큐브 설치");
+        FMODUnity.RuntimeManager.PlayOneShot(cube, transform.position);
     }
     private void PlayCrystalPedestalSound()
     {
-        Debug.Log("크리스탈 설치");
+        FMODUnity.RuntimeManager.PlayOneShot(crystal, transform.position);
     }
 }
