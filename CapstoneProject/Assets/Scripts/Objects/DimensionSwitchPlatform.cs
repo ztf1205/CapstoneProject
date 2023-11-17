@@ -33,6 +33,6 @@ public class DimensionSwitchPlatform : MonoBehaviour
     private void SwitchDimension()
     {
         EventManager.TriggerEvent("OnStartDollyZoom");
-        dimManager.SwitchDimension();
+        dimManager.SwitchDimension(true);
     }
 }

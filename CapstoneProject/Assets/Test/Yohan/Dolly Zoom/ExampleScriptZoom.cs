@@ -30,9 +30,9 @@ public class ExampleScriptZoom : MonoBehaviour
     }
 
     // Calculate the FOV needed to get a given frustum height at a given distance.
-    float FOVForHeightAndDistance(float height, float distance)
+    float FOVForHeightAndDistance(float frustumHeight, float distance)
     {
-        return 2.0f * Mathf.Atan(height * 0.5f / distance) * Mathf.Rad2Deg;
+        return 2.0f * Mathf.Atan(frustumHeight * 0.5f / distance) * Mathf.Rad2Deg;
     }
 
     // Start the dolly zoom effect.

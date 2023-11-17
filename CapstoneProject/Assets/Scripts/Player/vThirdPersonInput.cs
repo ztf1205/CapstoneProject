@@ -143,17 +143,9 @@ namespace Invector.vCharacterController
                 return;
             }
 
-            // 돌리 줌 모드가 아니면
-            if (!dimManager.IsDollyZoomMode)
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                if (Input.GetKeyDown(KeyCode.Mouse0))
-                {
-                    SwitchDimension();
-                }
-            }
-            else
-            {
-
+                SwitchDimension();
             }
         }
 
@@ -175,7 +167,7 @@ namespace Invector.vCharacterController
                     isCollisionCheckState = true;
                 }
             }
-            dimManager.SwitchDimension();
+            dimManager.SwitchDimension(false);
         }
 
         private void CursorHandle()
