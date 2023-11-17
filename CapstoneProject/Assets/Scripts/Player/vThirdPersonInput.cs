@@ -37,6 +37,8 @@ namespace Invector.vCharacterController
         private GameObject plane;
         [SerializeField]
         private GameObject playerUI;
+        [SerializeField]
+        private bool canUseSwitchDimensionInput = true;
 
         #endregion
 
@@ -139,7 +141,7 @@ namespace Invector.vCharacterController
 
         private void SwitchDimensionHandle()
         {
-            if(isDollyZoom)
+            if(isDollyZoom || canUseSwitchDimensionInput == false)
             {
                 return;
             }
