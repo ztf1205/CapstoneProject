@@ -133,7 +133,8 @@ namespace Invector.vCharacterController
             {
                 plane.SetActive(isMoveStop);
             }
-            playerUI.SetActive(isMoveStop);
+            //playerUI.SetActive(isMoveStop);
+            playerUI.SetActive(false);
         }
 
         private void SwitchDimensionHandle()
