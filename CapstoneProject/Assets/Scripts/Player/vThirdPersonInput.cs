@@ -113,6 +113,14 @@ namespace Invector.vCharacterController
         private void OnStartDollyZoom()
         {
             isDollyZoom = true;
+            if (dimManager.Is2D)
+            {
+                EventManager.TriggerEvent("DollyZoom3D");
+            }
+            else
+            {
+                EventManager.TriggerEvent("DollyZoom2D");
+            }
             MoveStopActivate(true);
         }
 
