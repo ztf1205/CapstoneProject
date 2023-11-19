@@ -9,10 +9,14 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public EventReference cube { get; private set; }
     [field: Header("Gain Crystal")]
     [field: SerializeField] public EventReference crystal { get; private set; }
-    [field: Header("OnDollyZoom")]
-    [field: SerializeField] public EventReference onDolly { get; private set; }
-    [field: Header("OffDollyZoom")]
-    [field: SerializeField] public EventReference offDolly { get; private set; }
+    [field: Header("DollyZoom2D")]
+    [field: SerializeField] public EventReference onDolly2D { get; private set; }
+    [field: Header("DollyZoom3D")]
+    [field: SerializeField] public EventReference onDolly3D { get; private set; }
+    [field: Header("JumpPad")]
+    [field: SerializeField] public EventReference jumpPad { get; private set; }
+    [field: Header("SuperJumpPad")]
+    [field: SerializeField] public EventReference superJumpPad { get; private set; }
 
     private void Awake()
     {
@@ -22,6 +26,8 @@ public class AudioManager : MonoBehaviour
         EventManager.Subscribe("CrysP", PlayCrystalPedestalSound);
         EventManager.Subscribe("DollyZoom2D", PlayDolly2DSound);
         EventManager.Subscribe("DollyZoom3D", PlayDolly3DSound);
+        EventManager.Subscribe("JumpPad", PlayJumpPadSound);
+        EventManager.Subscribe("SuperJumpPad", PlaySuperJumpPadSound);
     }
 
     private void OnDestroy()
@@ -32,6 +38,8 @@ public class AudioManager : MonoBehaviour
         EventManager.Unsubscribe("CrysP", PlayCrystalPedestalSound);
         EventManager.Unsubscribe("DollyZoom2D", PlayDolly2DSound);
         EventManager.Unsubscribe("DollyZoom3D", PlayDolly3DSound);
+        EventManager.Unsubscribe("JumpPad", PlayJumpPadSound);
+        EventManager.Unsubscribe("SuperJumpPad", PlaySuperJumpPadSound);
     }
 
     private void PlayCubeSound()
@@ -55,11 +63,21 @@ public class AudioManager : MonoBehaviour
     private void PlayDolly2DSound()
     {
         Debug.Log("돌리줌 2D!");
-        //FMODUnity.RuntimeManager.PlayOneShot(onDolly, transform.position);
+        //FMODUnity.RuntimeManager.PlayOneShot(onDolly2D, transform.position);
     }
     private void PlayDolly3DSound()
     {
         Debug.Log("돌리줌 3D!");
-        //FMODUnity.RuntimeManager.PlayOneShot(offDolly, transform.position);
+        //FMODUnity.RuntimeManager.PlayOneShot(onDolly3D, transform.position);
+    }
+    private void PlayJumpPadSound()
+    {
+        Debug.Log("강력 점프!");
+        //FMODUnity.RuntimeManager.PlayOneShot(jumpPad, transform.position);
+    }
+    private void PlaySuperJumpPadSound()
+    {
+        Debug.Log("초강력 점프!");
+        //FMODUnity.RuntimeManager.PlayOneShot(superJumpPad, transform.position);
     }
 }

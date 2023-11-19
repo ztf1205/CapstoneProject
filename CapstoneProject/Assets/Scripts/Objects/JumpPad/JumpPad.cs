@@ -18,6 +18,7 @@ public class JumpPad : MonoBehaviour
             jumpHeight = cc.originalJumpHeight * 1.5f;
             ChangeHeight();
             cc.SuperJump(jumpHeight);
+            EventManager.TriggerEvent("JumpPad");
         }
     }
 
