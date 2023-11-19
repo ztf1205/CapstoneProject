@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Runtime.CompilerServices;
 using UnityEditor;
+using Obi;
 
 public class TwoDimensionCamera : MonoBehaviour
 {
@@ -12,21 +13,36 @@ public class TwoDimensionCamera : MonoBehaviour
     private Vector3 camPos;
     [SerializeField] private float dz = 4000f;
 
+    [Header("Dead Zone")]
+    [SerializeField] private Vector2 deadZone;
+    [SerializeField] private Vector2 smoothingSpeed;
+
     private Camera cam;
     public float DefaultOrthoSize { get; private set; } = 5f;
     public float CurOrthoSize { get; private set; }
 
     public bool IsFollowingPlayer { get; set; } = true;
+
     private float pascalOrthoSize = 10f;
 
     private void Start()
     {
+        Init();
+    }
+
+    private void Init()
+    {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        cam = GetComponent<Camera>();
+
+        camPos.x = player.position.x + cameraOffset.x;
+        camPos.y = player.position.y + cameraOffset.y;
         camPos.z = player.position.z - dz;
 
-        cam = GetComponent<Camera>();
         CurOrthoSize = DefaultOrthoSize;
         cam.orthographicSize = CurOrthoSize;
+
+        transform.position = camPos;
     }
 
     private void FixedUpdate()
@@ -40,10 +56,27 @@ public class TwoDimensionCamera : MonoBehaviour
 
     private void CalculateCameraPosition()
     {
-        camPos.x = player.position.x + cameraOffset.x;
-        camPos.y = player.position.y + cameraOffset.y;
+        camPos.x = Mathf.Lerp(
+            transform.position.x,
+            player.position.x + cameraOffset.x,
+            Time.deltaTime * smoothingSpeed.x);
+        camPos.y = Mathf.Lerp(
+            transform.position.y,
+            player.position.y + cameraOffset.y,
+            Time.deltaTime * smoothingSpeed.y);
+
+        if (camPos.x - player.position.x > deadZone.x)
+            camPos.x = player.position.x + deadZone.x;
+        else if (camPos.x - player.position.x < -deadZone.x)
+            camPos.x = player.position.x - deadZone.x;
+
+        if (camPos.y - player.position.y > deadZone.y)
+            camPos.y = player.position.y + deadZone.y;
+        else if (camPos.y - player.position.y < -deadZone.y)
+            camPos.y = player.position.y - deadZone.y;
     }
 
+    // 연출
     public void PascalMoveCamera()
     {
         IsFollowingPlayer = false;
