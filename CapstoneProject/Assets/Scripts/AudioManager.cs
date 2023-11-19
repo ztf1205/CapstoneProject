@@ -17,6 +17,8 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public EventReference jumpPad { get; private set; }
     [field: Header("SuperJumpPad")]
     [field: SerializeField] public EventReference superJumpPad { get; private set; }
+    [field: Header("TimeStop")]
+    [field: SerializeField] public EventReference timeStop { get; private set; }
 
     private void Awake()
     {
@@ -28,6 +30,7 @@ public class AudioManager : MonoBehaviour
         EventManager.Subscribe("DollyZoom3D", PlayDolly3DSound);
         EventManager.Subscribe("JumpPad", PlayJumpPadSound);
         EventManager.Subscribe("SuperJumpPad", PlaySuperJumpPadSound);
+        EventManager.Subscribe("TimeStop", PlayTimeStopSound);
     }
 
     private void OnDestroy()
@@ -40,6 +43,7 @@ public class AudioManager : MonoBehaviour
         EventManager.Unsubscribe("DollyZoom3D", PlayDolly3DSound);
         EventManager.Unsubscribe("JumpPad", PlayJumpPadSound);
         EventManager.Unsubscribe("SuperJumpPad", PlaySuperJumpPadSound);
+        EventManager.Unsubscribe("TimeStop", PlayTimeStopSound);
     }
 
     private void PlayCubeSound()
@@ -79,5 +83,10 @@ public class AudioManager : MonoBehaviour
     {
         Debug.Log("초강력 점프!");
         //FMODUnity.RuntimeManager.PlayOneShot(superJumpPad, transform.position);
+    }
+    private void PlayTimeStopSound()
+    {
+        Debug.Log("시간 정지!");
+        //FMODUnity.RuntimeManager.PlayOneShot(timeStop, transform.position);
     }
 }

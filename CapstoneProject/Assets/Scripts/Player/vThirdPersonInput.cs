@@ -251,6 +251,7 @@ namespace Invector.vCharacterController
                 animator.speed = 0f;
 
                 isMoveStop = true;
+                EventManager.TriggerEvent("TimeStop");
             }
             else
             {
