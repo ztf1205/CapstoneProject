@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public EventReference cube { get; private set; }
     [field: Header("Gain Crystal")]
     [field: SerializeField] public EventReference crystal { get; private set; }
+    [field: Header("StandardCamera")]
+    [field: SerializeField] public EventReference changeDimension { get; private set; }
     [field: Header("DollyZoom2D")]
     [field: SerializeField] public EventReference onDolly2D { get; private set; }
     [field: Header("DollyZoom3D")]
@@ -19,6 +21,7 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public EventReference superJumpPad { get; private set; }
     [field: Header("TimeStop")]
     [field: SerializeField] public EventReference timeStop { get; private set; }
+    
 
     private void Awake()
     {
@@ -31,6 +34,7 @@ public class AudioManager : MonoBehaviour
         EventManager.Subscribe("JumpPad", PlayJumpPadSound);
         EventManager.Subscribe("SuperJumpPad", PlaySuperJumpPadSound);
         EventManager.Subscribe("TimeStop", PlayTimeStopSound);
+        EventManager.Subscribe("StandardCamera", PlayChangeDimensionSound);
     }
 
     private void OnDestroy()
@@ -44,6 +48,7 @@ public class AudioManager : MonoBehaviour
         EventManager.Unsubscribe("JumpPad", PlayJumpPadSound);
         EventManager.Unsubscribe("SuperJumpPad", PlaySuperJumpPadSound);
         EventManager.Unsubscribe("TimeStop", PlayTimeStopSound);
+        EventManager.Unsubscribe("StandardCamera", PlayChangeDimensionSound);
     }
 
     private void PlayCubeSound()
@@ -88,5 +93,10 @@ public class AudioManager : MonoBehaviour
     {
         Debug.Log("시간 정지!");
         //FMODUnity.RuntimeManager.PlayOneShot(timeStop, transform.position);
+    }
+    private void PlayChangeDimensionSound()
+    {
+        Debug.Log("차원 변환!");
+        //FMODUnity.RuntimeManager.PlayOneShot(changeDimension, transform.position);
     }
 }

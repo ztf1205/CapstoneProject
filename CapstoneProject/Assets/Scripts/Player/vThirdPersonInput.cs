@@ -157,6 +157,7 @@ namespace Invector.vCharacterController
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 SwitchDimension();
+                EventManager.TriggerEvent("StandardCamera");
             }
         }
 
@@ -216,6 +217,7 @@ namespace Invector.vCharacterController
         {
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
+                EventManager.TriggerEvent("TimeStop");
                 MoveStopActivate(true);
                 SetActiveUI(true);
             }
@@ -251,7 +253,6 @@ namespace Invector.vCharacterController
                 animator.speed = 0f;
 
                 isMoveStop = true;
-                EventManager.TriggerEvent("TimeStop");
             }
             else
             {
