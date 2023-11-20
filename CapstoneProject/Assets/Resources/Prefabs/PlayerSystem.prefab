@@ -3633,6 +3633,7 @@ MonoBehaviour:
   cameraMain: {fileID: 0}
   plane: {fileID: 4514543398828519173}
   playerUI: {fileID: 1987866228556544211}
+  canUseSwitchDimensionInput: 1
 --- !u!114 &3524703418403550684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8201,8 +8202,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2cc23cfe4436e643935788fe78b7c6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraOffset: {x: 0, y: 1}
+  cameraOffset: {x: 0, y: 2}
   dz: 4000
+  deadZone: {x: 4, y: 8}
+  smoothingSpeed: {x: 5, y: 5}
 --- !u!114 &6091481682996077610
 MonoBehaviour:
   m_ObjectHideFlags: 0

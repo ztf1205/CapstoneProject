@@ -291,6 +291,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -363834671915021466, guid: f491286c5403aca498e701a0a6e2cbc3, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -363834671915021466, guid: f491286c5403aca498e701a0a6e2cbc3, type: 3}
+      propertyPath: isCollision2DEnabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578939685644053879, guid: f491286c5403aca498e701a0a6e2cbc3, type: 3}
@@ -1350,6 +1354,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -363834671915021466, guid: f491286c5403aca498e701a0a6e2cbc3, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -363834671915021466, guid: f491286c5403aca498e701a0a6e2cbc3, type: 3}
+      propertyPath: isCollision2DEnabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 578939685644053879, guid: f491286c5403aca498e701a0a6e2cbc3, type: 3}

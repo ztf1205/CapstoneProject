@@ -79,6 +79,12 @@ public class CinematicCamera : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, targetPos, lerpSpeed * Time.deltaTime);
         transform.Translate(-(Vector3.forward) * zoomSpeed * Time.deltaTime);
         // Slerp for rotation
+        Quaternion cinematicCamQuaternion = transform.rotation;
+        Quaternion twoDimensionCamQuaternion = twoDimensionCam.transform.rotation;
+
+        if (Quaternion.Dot(cinematicCamQuaternion, twoDimensionCamQuaternion) < 0)
+            cinematicCamQuaternion = Quaternion.Inverse(cinematicCamQuaternion);
+
         transform.rotation = Quaternion.Slerp(transform.rotation, twoDimensionCam.transform.rotation, lerpSpeed * Time.deltaTime);
 
         if (cinematicCam.fieldOfView <= fovLowerLimit)
@@ -111,6 +117,13 @@ public class CinematicCamera : MonoBehaviour
     private void AlignTo3DCamera()
     {
         transform.DOMove(threeDimensionCam.transform.position, duration).SetEase(Ease.InOutSine);
+
+        Quaternion cinematicCamQuaternion = transform.rotation;
+        Quaternion threeDimensionCamQuaternion = threeDimensionCam.transform.rotation;
+
+        if (Quaternion.Dot(cinematicCamQuaternion, threeDimensionCamQuaternion) < 0)
+            cinematicCamQuaternion = Quaternion.Inverse(cinematicCamQuaternion);
+
         transform.DORotateQuaternion(threeDimensionCam.transform.rotation, duration).SetEase(Ease.InOutSine)
             .OnComplete(() =>
             {
