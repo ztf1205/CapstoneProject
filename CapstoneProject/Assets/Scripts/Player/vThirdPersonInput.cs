@@ -135,13 +135,13 @@ namespace Invector.vCharacterController
 
         private void UIHandle()
         {
-            if (dimManager.Is2D)
+            if (dimManager.Is2D == false && isDollyZoom == false)
             {
-                plane.SetActive(false);
+                plane.SetActive(isMoveStop);
             }
             else
             {
-                plane.SetActive(isMoveStop);
+                plane.SetActive(false);
             }
             //playerUI.SetActive(isMoveStop);
             playerUI.SetActive(false);
