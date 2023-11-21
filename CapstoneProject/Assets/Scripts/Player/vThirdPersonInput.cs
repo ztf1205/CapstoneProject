@@ -32,6 +32,8 @@ namespace Invector.vCharacterController
         private Animator animator;
         private bool isCollisionCheckState = false;
         private bool isDollyZoom = false;
+        private bool isWalking = false;
+        private bool prevIsGround = false;
 
         [HorizontalLine, SerializeField]
         private GameObject plane;
@@ -95,6 +97,12 @@ namespace Invector.vCharacterController
 
             // UI 활성화 처리
             UIHandle();
+
+            // 걷는 상태에 대한 이벤트 처리
+            WalkHandle();
+
+            // 착지에 대한 이벤트 처리
+            LandingHandle();
         }
 
         private void OnDestroy()
@@ -131,6 +139,51 @@ namespace Invector.vCharacterController
             {
                 MoveStopActivate(false);
             }
+        }
+
+        private void WalkHandle()
+        {
+            bool isMoving;
+
+            if(Input.GetAxisRaw(horizontalInput) == 0f && Input.GetAxisRaw(verticallInput) == 0f)
+            {
+                isMoving = false;
+            }
+            else
+            {
+                isMoving = true;
+            }
+
+            if (isMoving && cc.isGrounded)
+            {
+                if(isWalking == false)
+                {
+                    isWalking = true;
+                    EventManager.TriggerEvent("OnPlayerWalkStart");
+                    Debug.Log("OnPlayerWalkStart");
+                }
+            }
+            else
+            {
+                if (isWalking == true)
+                {
+                    isWalking = false;
+                    EventManager.TriggerEvent("OnPlayerWalkEnd");
+                    Debug.Log("OnPlayerWalkEnd");
+                    
+                }
+            }
+        }
+
+        private void LandingHandle()
+        {
+            if(cc.isGrounded == true && prevIsGround == false)
+            {
+                EventManager.TriggerEvent("OnPlayerLanding");
+                Debug.Log("OnPlayerLanding");
+            }
+
+            prevIsGround = cc.isGrounded;
         }
 
         private void UIHandle()
@@ -364,7 +417,11 @@ namespace Invector.vCharacterController
         protected virtual void JumpInput()
         {
             if (Input.GetKeyDown(jumpInput) && JumpConditions())
+            {
                 cc.Jump();
+                EventManager.TriggerEvent("OnPlayerJump");
+                Debug.Log("OnPlayerJump");
+            }
         }
 
         #endregion       
