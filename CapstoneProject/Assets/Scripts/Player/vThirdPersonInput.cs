@@ -165,7 +165,7 @@ namespace Invector.vCharacterController
 
             if (isMoving && cc.isGrounded)
             {
-                if(isWalking == false)
+                if(isWalking == false && !isMoveStop)
                 {
                     isWalking = true;
                     EventManager.TriggerEvent("OnPlayerWalkStart");
@@ -322,6 +322,10 @@ namespace Invector.vCharacterController
                 animator.speed = 0f;
 
                 isMoveStop = true;
+                if (isWalking)
+                {
+                    EventManager.TriggerEvent("OnPlayerWalkEnd");
+                }
             }
             else
             {
@@ -334,6 +338,10 @@ namespace Invector.vCharacterController
                 animator.speed = 1f;
 
                 isMoveStop = false;
+                if (isWalking)
+                {
+                    EventManager.TriggerEvent("OnPlayerWalkStart");
+                }
             }
             rigidbodyComponent.isKinematic = isMoveStop;
         }
