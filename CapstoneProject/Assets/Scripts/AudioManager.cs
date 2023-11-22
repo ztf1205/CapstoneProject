@@ -28,6 +28,8 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public EventReference jump { get; private set; }
     [field: Header("Landing")]
     [field: SerializeField] public EventReference landing { get; private set; }
+    [field: Header("SwitchDimensionFail")]
+    [field: SerializeField] public EventReference switchDimensionFail { get; private set; }
 
 
     private void Awake()
@@ -46,6 +48,7 @@ public class AudioManager : MonoBehaviour
         EventManager.Subscribe("OnPlayerWalkStart", PlayWalkingSound);
         EventManager.Subscribe("OnPlayerWalkEnd", OffWalkingSound);
         EventManager.Subscribe("OnPlayerJump", PlayJumpSound);
+        EventManager.Subscribe("SwitchDimensionFailSound", PlaySwitchDimensionFailSound);
 
         if (!_timeStop.IsNull && !_running.IsNull)
         {
@@ -71,6 +74,7 @@ public class AudioManager : MonoBehaviour
         EventManager.Unsubscribe("OnPlayerWalkStart", PlayWalkingSound);
         EventManager.Unsubscribe("OnPlayerWalkEnd", OffWalkingSound);
         EventManager.Unsubscribe("OnPlayerJump", PlayJumpSound);
+        EventManager.Unsubscribe("SwitchDimensionFailSound", PlaySwitchDimensionFailSound);
         timeStop.release();
         running.release();
     }
@@ -137,5 +141,8 @@ public class AudioManager : MonoBehaviour
     {
         FMODUnity.RuntimeManager.PlayOneShot(landing, transform.position);
     }
-
+    private void PlaySwitchDimensionFailSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(switchDimensionFail, transform.position);
+    }
 }

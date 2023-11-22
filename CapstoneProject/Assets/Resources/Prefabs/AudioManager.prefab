@@ -114,3 +114,10 @@ MonoBehaviour:
       Data3: 815665079
       Data4: 737653758
     Path: event:/Landing
+  <switchDimensionFail>k__BackingField:
+    Guid:
+      Data1: 1547106028
+      Data2: 1321684679
+      Data3: 1747113354
+      Data4: 632491240
+    Path: event:/NoChange

@@ -219,6 +219,7 @@ namespace Invector.vCharacterController
                 if (dimManager.CanSwitchDimension == false && canCollisionCheck == false)
                 {
                     EventManager.TriggerEvent("OnSwitchDimensionFail");
+                    EventManager.TriggerEvent("SwitchDimensionFailSound");
                 }
                 else
                 {
