@@ -283,6 +283,7 @@ namespace Invector.vCharacterController
 
             if (Input.GetKeyUp(KeyCode.Mouse1) && isCollisionCheckState == false)
             {
+                EventManager.TriggerEvent("OffTimeStop");
                 MoveStopActivate(false);
                 SetActiveUI(false);
             }

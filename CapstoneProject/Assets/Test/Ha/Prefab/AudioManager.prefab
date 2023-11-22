@@ -58,3 +58,45 @@ MonoBehaviour:
       Data3: -404036969
       Data4: -1822815416
     Path: event:/SFX/GainCrystal
+  <changeDimension>k__BackingField:
+    Guid:
+      Data1: -1775432471
+      Data2: 1168211620
+      Data3: -946955124
+      Data4: 1527515025
+    Path: event:/StandardCamera
+  <onDolly2D>k__BackingField:
+    Guid:
+      Data1: 1234265230
+      Data2: 1314922021
+      Data3: -1345300809
+      Data4: 412830817
+    Path: event:/DollyZoom2D
+  <onDolly3D>k__BackingField:
+    Guid:
+      Data1: 809826652
+      Data2: 1281334753
+      Data3: -1173110345
+      Data4: -1105925138
+    Path: event:/DollyZoom3D
+  <jumpPad>k__BackingField:
+    Guid:
+      Data1: 2012573903
+      Data2: 1110124644
+      Data3: 32264360
+      Data4: -526128515
+    Path: event:/JumpPad
+  <superJumpPad>k__BackingField:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  _timeStop:
+    Guid:
+      Data1: 1849979604
+      Data2: 1137533881
+      Data3: 1396274596
+      Data4: 1174166367
+    Path: event:/TimeStop

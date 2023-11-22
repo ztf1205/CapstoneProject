@@ -1284,6 +1284,126 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: _timeStop.Path
+      value: event:/TimeStop
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: _timeStop.Guid.Data1
+      value: 1849979604
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: _timeStop.Guid.Data2
+      value: 1137533881
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: _timeStop.Guid.Data3
+      value: 1396274596
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: _timeStop.Guid.Data4
+      value: 1174166367
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <jumpPad>k__BackingField.Path
+      value: event:/JumpPad
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <timeStop>k__BackingField.Path
+      value: event:/TimeStop
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <onDolly2D>k__BackingField.Path
+      value: event:/DollyZoom2D
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <onDolly3D>k__BackingField.Path
+      value: event:/DollyZoom3D
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <jumpPad>k__BackingField.Guid.Data1
+      value: 2012573903
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <jumpPad>k__BackingField.Guid.Data2
+      value: 1110124644
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <jumpPad>k__BackingField.Guid.Data3
+      value: 32264360
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <jumpPad>k__BackingField.Guid.Data4
+      value: -526128515
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <timeStop>k__BackingField.Guid.Data1
+      value: 1849979604
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <timeStop>k__BackingField.Guid.Data2
+      value: 1137533881
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <timeStop>k__BackingField.Guid.Data3
+      value: 1396274596
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <timeStop>k__BackingField.Guid.Data4
+      value: 1174166367
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <changeDimension>k__BackingField.Path
+      value: event:/StandardCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <onDolly2D>k__BackingField.Guid.Data1
+      value: 1234265230
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <onDolly2D>k__BackingField.Guid.Data2
+      value: 1314922021
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <onDolly2D>k__BackingField.Guid.Data3
+      value: -1345300809
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <onDolly2D>k__BackingField.Guid.Data4
+      value: 412830817
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <onDolly3D>k__BackingField.Guid.Data1
+      value: 809826652
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <onDolly3D>k__BackingField.Guid.Data2
+      value: 1281334753
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <onDolly3D>k__BackingField.Guid.Data3
+      value: -1173110345
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <onDolly3D>k__BackingField.Guid.Data4
+      value: -1105925138
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <changeDimension>k__BackingField.Guid.Data1
+      value: -1775432471
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <changeDimension>k__BackingField.Guid.Data2
+      value: 1168211620
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <changeDimension>k__BackingField.Guid.Data3
+      value: -946955124
+      objectReference: {fileID: 0}
+    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
+      propertyPath: <changeDimension>k__BackingField.Guid.Data4
+      value: 1527515025
+      objectReference: {fileID: 0}
     - target: {fileID: 7827409513827791305, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -1906,6 +2026,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54861d5ebaee935408a2dfd62169c3d5, type: 3}
+--- !u!1 &1378712654 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2657042029149080055, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
+  m_PrefabInstance: {fileID: 925529778}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1378712656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378712654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1001 &1429202144
 PrefabInstance:
   m_ObjectHideFlags: 0

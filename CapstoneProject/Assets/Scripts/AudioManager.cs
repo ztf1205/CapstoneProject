@@ -20,7 +20,8 @@ public class AudioManager : MonoBehaviour
     [field: Header("SuperJumpPad")]
     [field: SerializeField] public EventReference superJumpPad { get; private set; }
     [field: Header("TimeStop")]
-    [field: SerializeField] public EventReference timeStop { get; private set; }
+    [field: SerializeField] private FMODUnity.EventReference _timeStop;
+    private FMOD.Studio.EventInstance timeStop;
     
 
     private void Awake()
@@ -35,6 +36,13 @@ public class AudioManager : MonoBehaviour
         EventManager.Subscribe("SuperJumpPad", PlaySuperJumpPadSound);
         EventManager.Subscribe("TimeStop", PlayTimeStopSound);
         EventManager.Subscribe("StandardCamera", PlayChangeDimensionSound);
+        EventManager.Subscribe("OffTimeStop", OffTimeStopSound);
+
+        if (!_timeStop.IsNull)
+        {
+            timeStop = FMODUnity.RuntimeManager.CreateInstance(_timeStop);
+        }
+
     }
 
     private void OnDestroy()
@@ -49,6 +57,8 @@ public class AudioManager : MonoBehaviour
         EventManager.Unsubscribe("SuperJumpPad", PlaySuperJumpPadSound);
         EventManager.Unsubscribe("TimeStop", PlayTimeStopSound);
         EventManager.Unsubscribe("StandardCamera", PlayChangeDimensionSound);
+        EventManager.Unsubscribe("OffTimeStop", OffTimeStopSound);
+        timeStop.release();
     }
 
     private void PlayCubeSound()
@@ -71,18 +81,15 @@ public class AudioManager : MonoBehaviour
     }
     private void PlayDolly2DSound()
     {
-        Debug.Log("돌리줌 2D!");
-        //FMODUnity.RuntimeManager.PlayOneShot(onDolly2D, transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot(onDolly2D, transform.position);
     }
     private void PlayDolly3DSound()
     {
-        Debug.Log("돌리줌 3D!");
-        //FMODUnity.RuntimeManager.PlayOneShot(onDolly3D, transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot(onDolly3D, transform.position);
     }
     private void PlayJumpPadSound()
     {
-        Debug.Log("강력 점프!");
-        //FMODUnity.RuntimeManager.PlayOneShot(jumpPad, transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot(jumpPad, transform.position);
     }
     private void PlaySuperJumpPadSound()
     {
@@ -91,12 +98,16 @@ public class AudioManager : MonoBehaviour
     }
     private void PlayTimeStopSound()
     {
-        Debug.Log("시간 정지!");
-        //FMODUnity.RuntimeManager.PlayOneShot(timeStop, transform.position);
+        timeStop.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
+
+        timeStop.start();
+    }
+    private void OffTimeStopSound()
+    {
+        timeStop.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
     private void PlayChangeDimensionSound()
     {
-        Debug.Log("차원 변환!");
-        //FMODUnity.RuntimeManager.PlayOneShot(changeDimension, transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot(changeDimension, transform.position);
     }
 }
