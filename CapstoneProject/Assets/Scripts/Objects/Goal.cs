@@ -19,7 +19,7 @@ public class Goal : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             string currentSceneName = SceneManager.GetActiveScene().name;
-            if (currentSceneName == "5")
+            if (currentSceneName == "4")
             {
                 sceneLoader.LoadScene("GameClear");
             }
