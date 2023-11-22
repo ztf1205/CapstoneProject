@@ -41,6 +41,8 @@ namespace Invector.vCharacterController
         private GameObject playerUI;
         [SerializeField]
         private bool canUseSwitchDimensionInput = true;
+        [SerializeField]
+        private bool canCollisionCheck = false;
 
         #endregion
 
@@ -112,6 +114,7 @@ namespace Invector.vCharacterController
 
             EventManager.Unsubscribe("OnStartDollyZoom", OnStartDollyZoom);
             EventManager.Unsubscribe("OnEndDollyZoom", OnEndDollyZoom);
+            EventManager.Unsubscribe("OnGainSkillItem", OnGainSkillItem);
         }
 
         public virtual void OnAnimatorMove()
@@ -213,10 +216,18 @@ namespace Invector.vCharacterController
                 return;
             }
 
+
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                SwitchDimension();
-                EventManager.TriggerEvent("StandardCamera");
+                if (dimManager.CanSwitchDimension == false && canCollisionCheck == false)
+                {
+                    EventManager.TriggerEvent("OnSwitchDimensionFail");
+                }
+                else
+                {
+                    SwitchDimension();
+                    EventManager.TriggerEvent("StandardCamera");
+                }
             }
         }
 
