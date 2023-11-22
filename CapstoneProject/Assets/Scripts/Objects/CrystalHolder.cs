@@ -11,7 +11,6 @@ public class CrystalHolder : SignalGenerator
         if (collision.gameObject.CompareTag("Player") && CanHoldCrystal)
         {
             GeneratorActivate();
-            EventManager.TriggerEvent("CrysP");
         }
     }
 

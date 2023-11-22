@@ -35,6 +35,7 @@ public class Crystal : MonoBehaviour
     private void ActivateCrystal()
     {
         gameObject.SetActive (true);
+        EventManager.TriggerEvent("CrysP");
     }
 
     private void OnDestroy()
