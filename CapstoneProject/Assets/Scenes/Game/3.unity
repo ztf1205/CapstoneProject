@@ -880,6 +880,10 @@ PrefabInstance:
       propertyPath: superJumpHeight
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 6926795587061394916, guid: a7f31184f0a3b1e4abab413b594b86a0, type: 3}
+      propertyPath: superJumpHeight
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7054137650149419417, guid: a7f31184f0a3b1e4abab413b594b86a0, type: 3}
       propertyPath: m_Name
       value: SuperJumpPad
@@ -1339,6 +1343,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2934136315568818148, guid: a7f31184f0a3b1e4abab413b594b86a0, type: 3}
+      propertyPath: superJumpHeight
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6926795587061394916, guid: a7f31184f0a3b1e4abab413b594b86a0, type: 3}
       propertyPath: superJumpHeight
       value: 12
       objectReference: {fileID: 0}
