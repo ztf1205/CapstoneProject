@@ -166,7 +166,6 @@ namespace Invector.vCharacterController
                 {
                     isWalking = true;
                     EventManager.TriggerEvent("OnPlayerWalkStart");
-                    Debug.Log("OnPlayerWalkStart");
                 }
             }
             else
@@ -175,7 +174,6 @@ namespace Invector.vCharacterController
                 {
                     isWalking = false;
                     EventManager.TriggerEvent("OnPlayerWalkEnd");
-                    Debug.Log("OnPlayerWalkEnd");
                     
                 }
             }
@@ -186,7 +184,6 @@ namespace Invector.vCharacterController
             if(cc.isGrounded == true && prevIsGround == false)
             {
                 EventManager.TriggerEvent("OnPlayerLanding");
-                Debug.Log("OnPlayerLanding");
             }
 
             prevIsGround = cc.isGrounded;
@@ -427,7 +424,6 @@ namespace Invector.vCharacterController
             {
                 cc.Jump();
                 EventManager.TriggerEvent("OnPlayerJump");
-                Debug.Log("OnPlayerJump");
             }
         }
 
