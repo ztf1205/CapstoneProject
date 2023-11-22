@@ -1284,26 +1284,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
-      propertyPath: <switchDimensionFail>k__BackingField.Path
-      value: event:/NoChange
-      objectReference: {fileID: 0}
-    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
-      propertyPath: <switchDimensionFail>k__BackingField.Guid.Data1
-      value: 1547106028
-      objectReference: {fileID: 0}
-    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
-      propertyPath: <switchDimensionFail>k__BackingField.Guid.Data2
-      value: 1321684679
-      objectReference: {fileID: 0}
-    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
-      propertyPath: <switchDimensionFail>k__BackingField.Guid.Data3
-      value: 1747113354
-      objectReference: {fileID: 0}
-    - target: {fileID: 7827409513827791304, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
-      propertyPath: <switchDimensionFail>k__BackingField.Guid.Data4
-      value: 632491240
-      objectReference: {fileID: 0}
     - target: {fileID: 7827409513827791305, guid: e35852d6b3cd2934eb3d2837f66ad002, type: 3}
       propertyPath: m_Name
       value: AudioManager

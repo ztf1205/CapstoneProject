@@ -5,6 +5,7 @@ using UnityEngine;
 public class Crystal : MonoBehaviour
 {
     public bool IsAcquired { get; private set; } = false;
+    public bool IsHolden { get; private set; } = false;
     [SerializeField] private Transform crystalHolder;
 
     private void Start()
@@ -35,7 +36,12 @@ public class Crystal : MonoBehaviour
     private void ActivateCrystal()
     {
         gameObject.SetActive (true);
-        EventManager.TriggerEvent("CrysP");
+        
+        if (!IsHolden)
+        {
+            IsHolden = true;
+            EventManager.TriggerEvent("CrysP");
+        }
     }
 
     private void OnDestroy()
