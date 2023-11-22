@@ -48,6 +48,7 @@ namespace Invector.vCharacterController
         {
             EventManager.Subscribe("OnStartDollyZoom", OnStartDollyZoom);
             EventManager.Subscribe("OnEndDollyZoom", OnEndDollyZoom);
+            EventManager.Subscribe("OnGainSkillItem", OnGainSkillItem);
         }
 
         protected virtual void Start()
@@ -139,6 +140,11 @@ namespace Invector.vCharacterController
             {
                 MoveStopActivate(false);
             }
+        }
+
+        private void OnGainSkillItem()
+        {
+            canUseSwitchDimensionInput = true;
         }
 
         private void WalkHandle()
