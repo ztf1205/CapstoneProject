@@ -7,6 +7,10 @@ public class AudioManager : MonoBehaviour
 {
     [field: Header("Gain Cube")]
     [field: SerializeField] public EventReference cube { get; private set; }
+    [field: Header("Game Clear")]
+    [field: SerializeField] public EventReference gameClear { get; private set; }
+    [field: Header("Level Clear")]
+    [field: SerializeField] public EventReference levelClear { get; private set; }
     [field: Header("Get Item")]
     [field: SerializeField] public EventReference getItem { get; private set; }
     [field: Header("Respawn")]
@@ -57,6 +61,8 @@ public class AudioManager : MonoBehaviour
         EventManager.Subscribe("GetItem", PlayGetItemSound);
         EventManager.Subscribe("LandingItem", PlayLandingItemSound);
         EventManager.Subscribe("Respawn", PlayRespawnSound);
+        EventManager.Subscribe("GameClear", PlayGameClearSound);
+        EventManager.Subscribe("LevelClear", PlayLevelClearSound);
 
         if (_timeStop.IsNull == false)
         {
@@ -88,6 +94,8 @@ public class AudioManager : MonoBehaviour
         EventManager.Unsubscribe("GetItem", PlayGetItemSound);
         EventManager.Unsubscribe("GetItem", PlayLandingItemSound);
         EventManager.Unsubscribe("Respawn", PlayRespawnSound);
+        EventManager.Unsubscribe("GameClear", PlayGameClearSound);
+        EventManager.Unsubscribe("LevelClear", PlayLevelClearSound);
 
         OffTimeStopSound();
         OffWalkingSound();
@@ -169,5 +177,13 @@ public class AudioManager : MonoBehaviour
     private void PlayRespawnSound()
     {
         FMODUnity.RuntimeManager.PlayOneShot(respawn, transform.position);
+    }
+    private void PlayGameClearSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(gameClear, transform.position);
+    }
+    private void PlayLevelClearSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(levelClear, transform.position);
     }
 }

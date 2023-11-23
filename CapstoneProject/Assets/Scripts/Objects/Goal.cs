@@ -22,9 +22,11 @@ public class Goal : MonoBehaviour
             if (currentSceneName == "4")
             {
                 sceneLoader.LoadScene("GameClear");
+                EventManager.TriggerEvent("GameClear");
             }
             else
             {
+                EventManager.TriggerEvent("LevelClear");
                 int nextScene = int.Parse(currentSceneName) + 1;
                 sceneLoader.LoadScene(nextScene.ToString());
             }

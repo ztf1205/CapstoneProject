@@ -51,6 +51,20 @@ MonoBehaviour:
       Data3: 1373313951
       Data4: 190057841
     Path: event:/SFX/GainCube
+  <gameClear>k__BackingField:
+    Guid:
+      Data1: 843579443
+      Data2: 1330871859
+      Data3: 281500303
+      Data4: -1464005006
+    Path: event:/LevelClear
+  <levelClear>k__BackingField:
+    Guid:
+      Data1: 843579443
+      Data2: 1330871859
+      Data3: 281500303
+      Data4: -1464005006
+    Path: event:/LevelClear
   <getItem>k__BackingField:
     Guid:
       Data1: -1558638039
