@@ -83,7 +83,10 @@ public class Platform : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Item"))
+        {
             other.transform.SetParent(transform);
+            EventManager.TriggerEvent("LandingItem");
+        }
     }
 
     private void OnTriggerExit(Collider other)

@@ -28,11 +28,10 @@ public class ItemTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (acquiredItem && !itemUsed)
+        if (acquiredItem.IsAcquired && !itemUsed)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                EventManager.TriggerEvent("LandingItem");
                 EventManager.TriggerEvent("TextOff");
                 item.SetActive(true);
                 itemUsed = true;
