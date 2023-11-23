@@ -154,30 +154,45 @@ namespace Invector.vCharacterController
         {
             bool isMoving;
 
-            if(Input.GetAxisRaw(horizontalInput) == 0f && Input.GetAxisRaw(verticallInput) == 0f)
+            if (dimManager.Is2D)
             {
-                isMoving = false;
-            }
-            else
-            {
-                isMoving = true;
-            }
-
-            if (isMoving && cc.isGrounded)
-            {
-                if(isWalking == false && !isMoveStop)
+                if (Input.GetAxisRaw(horizontalInput) == 0f)
                 {
-                    isWalking = true;
-                    EventManager.TriggerEvent("OnPlayerWalkStart");
+                    isMoving = false;
+                }
+                else
+                {
+                    isMoving = true;
                 }
             }
             else
             {
-                if (isWalking == true)
+                if (Input.GetAxisRaw(horizontalInput) == 0f && Input.GetAxisRaw(verticallInput) == 0f)
+                {
+                    isMoving = false;
+                }
+                else
+                {
+                    isMoving = true;
+                }
+            }
+
+            if (isWalking)
+            {
+                // 걷고 있던 상태인데, 걷지 않으면 신호
+                if (isMoving == false || cc.isGrounded == false || isMoveStop)
                 {
                     isWalking = false;
                     EventManager.TriggerEvent("OnPlayerWalkEnd");
-                    
+                }
+            }
+            else
+            {
+                // 걷지 않고 있는 상태인데, 걸으면 신호
+                if (isMoving && cc.isGrounded && isMoveStop == false)
+                {
+                    isWalking = true;
+                    EventManager.TriggerEvent("OnPlayerWalkStart");
                 }
             }
         }
@@ -322,10 +337,6 @@ namespace Invector.vCharacterController
                 animator.speed = 0f;
 
                 isMoveStop = true;
-                if (isWalking)
-                {
-                    EventManager.TriggerEvent("OnPlayerWalkEnd");
-                }
             }
             else
             {
@@ -338,10 +349,6 @@ namespace Invector.vCharacterController
                 animator.speed = 1f;
 
                 isMoveStop = false;
-                if (isWalking)
-                {
-                    EventManager.TriggerEvent("OnPlayerWalkStart");
-                }
             }
             rigidbodyComponent.isKinematic = isMoveStop;
         }
