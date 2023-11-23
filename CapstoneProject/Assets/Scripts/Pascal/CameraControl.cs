@@ -8,6 +8,14 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private TwoDimensionCamera td;
     [SerializeField] private bool isExit;
 
+    private bool pascalFlag = false;
+    private bool resetFlag = false;
+
+    private void Start()
+    {
+        EventManager.Subscribe("Move2DCameraWhenRespawn", Move2DCameraWhenRespawn);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -20,19 +28,59 @@ public class CameraControl : MonoBehaviour
             {
                 if (!isExit)
                 {
-                    if (direction < 0)
+                    if (direction < 0 && !pascalFlag)
+                    {
+                        pascalFlag = true;
+                        resetFlag = false;
                         td.PascalMoveCamera();
-                    else
+                    }
+                    else if (direction > 0 && !resetFlag)
+                    {
+                        resetFlag = true;
+                        pascalFlag = false;
                         td.ResetCamera();
+                    }
                 }
                else
                 {
-                    if (direction < 0)
+                    if (direction < 0 && !resetFlag)
+                    {
+                        resetFlag = true;
+                        pascalFlag = false;
                         td.ResetCamera();
-                    else
+                    }
+                        
+                    else if (direction > 0 && !pascalFlag)
+                    {
+                        pascalFlag = true;
+                        resetFlag = false;
                         td.PascalMoveCamera();
+                    }
+                        
                 }
             }
         }
+    }
+
+    private void Move2DCameraWhenRespawn()
+    {
+        if (pascalFlag)
+        {
+            var tdCamera = td.GetComponent<TwoDimensionCamera>();
+            tdCamera.IsFollowingPlayer = true;
+
+
+            var cam = td.GetComponent<Camera>();
+            cam.orthographicSize = tdCamera.DefaultOrthoSize;
+
+            pascalFlag = false;
+            resetFlag = false;
+
+        }
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Unsubscribe("Move2DCameraWhenRespawn", Move2DCameraWhenRespawn);
     }
 }

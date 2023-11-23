@@ -33,5 +33,8 @@ public class CheckPoint : MonoBehaviour
         player.transform.position = transform.position;
         playerRigidbody.position = transform.position;
         playerRigidbody.velocity = Vector3.zero;
+
+        // Pascal에서 리스폰 시
+        EventManager.TriggerEvent("Move2DCameraWhenRespawn");
     }
 }
