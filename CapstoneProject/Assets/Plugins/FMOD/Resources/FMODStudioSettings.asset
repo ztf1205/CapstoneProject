@@ -314,6 +314,7 @@ MonoBehaviour:
   - Dialogue_JP
   - Music
   - SFX
+  - UI
   - Vehicles
   - VO
   BanksToLoad: []
