@@ -1397,18 +1397,6 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8616907681627111805, guid: b3018625f38a4784ebfd6709af324890, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8616907681627111805, guid: b3018625f38a4784ebfd6709af324890, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8616907681627111805, guid: b3018625f38a4784ebfd6709af324890, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8616907681627111805, guid: b3018625f38a4784ebfd6709af324890, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15
       objectReference: {fileID: 0}
@@ -1589,6 +1577,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 622017124886023456, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
+      propertyPath: sharedInstanceID
+      value: 293d9a3d-8ab8-438b-abeb-a90f6d398c10
+      objectReference: {fileID: 0}
     - target: {fileID: 855161711080121790, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
       propertyPath: m_Name
       value: PlayerSystem
@@ -1644,6 +1636,10 @@ PrefabInstance:
     - target: {fileID: 3524703418403550685, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
       propertyPath: canUseSwitchDimensionInput
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091481682996077610, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
+      propertyPath: sharedInstanceID
+      value: 2b258026-38a1-42a2-8c82-d8e0346b8560
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
