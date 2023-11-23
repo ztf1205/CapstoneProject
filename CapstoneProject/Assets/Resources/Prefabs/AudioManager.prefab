@@ -58,6 +58,13 @@ MonoBehaviour:
       Data3: -142504780
       Data4: 111742872
     Path: event:/GainItem
+  <respawn>k__BackingField:
+    Guid:
+      Data1: 1539167185
+      Data2: 1295288529
+      Data3: -1316594048
+      Data4: 1106751988
+    Path: event:/Respawn
   <landingItem>k__BackingField:
     Guid:
       Data1: -1396226629

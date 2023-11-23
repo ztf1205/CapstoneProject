@@ -9,6 +9,8 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public EventReference cube { get; private set; }
     [field: Header("Get Item")]
     [field: SerializeField] public EventReference getItem { get; private set; }
+    [field: Header("Respawn")]
+    [field: SerializeField] public EventReference respawn { get; private set; }
     [field: Header("Landing Item")]
     [field: SerializeField] public EventReference landingItem { get; private set; }
     [field: Header("Gain Crystal")]
@@ -55,6 +57,7 @@ public class AudioManager : MonoBehaviour
         EventManager.Subscribe("SwitchDimensionFailSound", PlaySwitchDimensionFailSound);
         EventManager.Subscribe("GetItem", PlayGetItemSound);
         EventManager.Subscribe("LandingItem", PlayLandingItemSound);
+        EventManager.Subscribe("Respawn", PlayRespawnSound);
 
         if (_timeStop.IsNull == false)
         {
@@ -86,6 +89,7 @@ public class AudioManager : MonoBehaviour
         EventManager.Unsubscribe("SwitchDimensionFailSound", PlaySwitchDimensionFailSound);
         EventManager.Unsubscribe("GetItem", PlayGetItemSound);
         EventManager.Unsubscribe("GetItem", PlayLandingItemSound);
+        EventManager.Unsubscribe("Respawn", PlayRespawnSound);
 
         OffTimeStopSound();
         OffWalkingSound();
@@ -167,5 +171,9 @@ public class AudioManager : MonoBehaviour
     private void PlayLandingItemSound()
     {
         FMODUnity.RuntimeManager.PlayOneShot(landingItem, transform.position);
+    }
+    private void PlayRespawnSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(respawn, transform.position);
     }
 }
