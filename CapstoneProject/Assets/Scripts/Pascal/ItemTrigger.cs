@@ -7,7 +7,6 @@ public class ItemTrigger : MonoBehaviour
 {
     [SerializeField] private Item acquiredItem;
     [SerializeField] private GameObject item;
-    [SerializeField] private GameObject itemText;
 
     private static bool itemUsed = false;
 
@@ -15,7 +14,7 @@ public class ItemTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && acquiredItem.IsAcquired && !itemUsed)
         {
-            itemText.SetActive(true);
+            EventManager.TriggerEvent("ItemTextOn");
         }
     }
 
@@ -23,7 +22,7 @@ public class ItemTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && acquiredItem.IsAcquired && !itemUsed)
         {
-            itemText.SetActive(false);
+            EventManager.TriggerEvent("TextOff");
         }
     }
 
@@ -33,7 +32,7 @@ public class ItemTrigger : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                itemText.SetActive(false);
+                EventManager.TriggerEvent("TextOff");
                 item.SetActive(true);
                 itemUsed = true;
             }
