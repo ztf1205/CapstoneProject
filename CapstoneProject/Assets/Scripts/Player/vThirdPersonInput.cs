@@ -1,6 +1,5 @@
 using UnityEngine;
 using NaughtyAttributes;
-using UnityEditor.Build;
 
 namespace Invector.vCharacterController
 {
