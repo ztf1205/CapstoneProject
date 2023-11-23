@@ -21,6 +21,7 @@ public class CheckPointCollider : MonoBehaviour
 
             gameObject.SetActive(false);
             checkPointFlag.SetActive(true);
+            EventManager.TriggerEvent("OnFlag");
         }
     }
 }

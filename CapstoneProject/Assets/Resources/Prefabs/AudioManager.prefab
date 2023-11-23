@@ -156,3 +156,10 @@ MonoBehaviour:
       Data3: 1747113354
       Data4: 632491240
     Path: event:/NoChange
+  <checkPointSound>k__BackingField:
+    Guid:
+      Data1: -201306034
+      Data2: 1328133938
+      Data3: 1018825658
+      Data4: -1928166886
+    Path: event:/OnFlag

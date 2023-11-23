@@ -40,6 +40,8 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public EventReference landing { get; private set; }
     [field: Header("SwitchDimensionFail")]
     [field: SerializeField] public EventReference switchDimensionFail { get; private set; }
+    [field: Header("On Flag")]
+    [field: SerializeField] public EventReference checkPointSound { get; private set; }
 
 
     private void Awake()
@@ -63,6 +65,7 @@ public class AudioManager : MonoBehaviour
         EventManager.Subscribe("Respawn", PlayRespawnSound);
         EventManager.Subscribe("GameClear", PlayGameClearSound);
         EventManager.Subscribe("LevelClear", PlayLevelClearSound);
+        EventManager.Subscribe("OnFlag", PlayCheckPointSound);
 
         if (_timeStop.IsNull == false)
         {
@@ -96,6 +99,7 @@ public class AudioManager : MonoBehaviour
         EventManager.Unsubscribe("Respawn", PlayRespawnSound);
         EventManager.Unsubscribe("GameClear", PlayGameClearSound);
         EventManager.Unsubscribe("LevelClear", PlayLevelClearSound);
+        EventManager.Unsubscribe("OnFlag", PlayCheckPointSound);
 
         OffTimeStopSound();
         OffWalkingSound();
@@ -185,5 +189,9 @@ public class AudioManager : MonoBehaviour
     private void PlayLevelClearSound()
     {
         FMODUnity.RuntimeManager.PlayOneShot(levelClear, transform.position);
+    }
+    private void PlayCheckPointSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(checkPointSound, transform.position);
     }
 }
