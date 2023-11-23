@@ -82,7 +82,7 @@ public class TwoDimensionCamera : MonoBehaviour
         IsFollowingPlayer = false;
 
         float duration = 1f;
-        Vector3 targetPos = new Vector3(player.position.x + 16f, transform.position.y - 2f, transform.position.z);
+        Vector3 targetPos = new Vector3(player.position.x + 19f, transform.position.y - 2f, transform.position.z);
         CurOrthoSize = pascalOrthoSize;
 ;
         transform.DOMove(targetPos, duration);

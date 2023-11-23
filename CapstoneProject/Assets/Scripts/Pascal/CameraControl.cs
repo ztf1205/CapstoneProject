@@ -28,35 +28,40 @@ public class CameraControl : MonoBehaviour
             {
                 if (!isExit)
                 {
-                    if (direction < 0 && !pascalFlag)
+                    //if (direction < 0 && !pascalFlag)
+                    //{
+                    //    pascalFlag = true;
+                    //    resetFlag = false;
+                    //    td.PascalMoveCamera();
+                    //}
+                    //else if (direction > 0 && !resetFlag)
+                    //{
+                    //    resetFlag = true;
+                    //    pascalFlag = false;
+                    //    td.ResetCamera();
+                    //}
+                    if (!pascalFlag)
                     {
                         pascalFlag = true;
-                        resetFlag = false;
                         td.PascalMoveCamera();
-                    }
-                    else if (direction > 0 && !resetFlag)
-                    {
-                        resetFlag = true;
-                        pascalFlag = false;
-                        td.ResetCamera();
                     }
                 }
                else
                 {
-                    if (direction < 0 && !resetFlag)
-                    {
-                        resetFlag = true;
-                        pascalFlag = false;
-                        td.ResetCamera();
-                    }
-                        
-                    else if (direction > 0 && !pascalFlag)
-                    {
-                        pascalFlag = true;
-                        resetFlag = false;
-                        td.PascalMoveCamera();
-                    }
-                        
+                    //if (direction < 0 && !resetFlag)
+                    //{
+                    //    resetFlag = true;
+                    //    pascalFlag = false;
+                    //    td.ResetCamera();
+                    //}
+
+                    //else if (direction > 0 && !pascalFlag)
+                    //{
+                    //    pascalFlag = true;
+                    //    resetFlag = false;
+                    //    td.PascalMoveCamera();
+                    //}
+                    td.ResetCamera();
                 }
             }
         }

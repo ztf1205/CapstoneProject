@@ -81,7 +81,7 @@ public class AudioManager : MonoBehaviour
     private void OnDestroy()
     {
         EventManager.Unsubscribe("GainCube", PlayCubeSound);
-        EventManager.Unsubscribe("GainCrystal", PlaySkillItemSound);
+        EventManager.Unsubscribe("OnGainSkillItem", PlaySkillItemSound);
         EventManager.Unsubscribe("CubP", PlayCubePedestalSound);
         EventManager.Unsubscribe("DollyZoom2D", PlayDolly2DSound);
         EventManager.Unsubscribe("DollyZoom3D", PlayDolly3DSound);
@@ -95,7 +95,7 @@ public class AudioManager : MonoBehaviour
         EventManager.Unsubscribe("OnPlayerJump", PlayJumpSound);
         EventManager.Unsubscribe("SwitchDimensionFailSound", PlaySwitchDimensionFailSound);
         EventManager.Unsubscribe("GetItem", PlayGetItemSound);
-        EventManager.Unsubscribe("GetItem", PlayLandingItemSound);
+        EventManager.Unsubscribe("LandingItem", PlayLandingItemSound);
         EventManager.Unsubscribe("Respawn", PlayRespawnSound);
         EventManager.Unsubscribe("GameClear", PlayGameClearSound);
         EventManager.Unsubscribe("LevelClear", PlayLevelClearSound);
