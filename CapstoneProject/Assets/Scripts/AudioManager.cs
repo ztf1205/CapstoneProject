@@ -13,8 +13,8 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public EventReference respawn { get; private set; }
     [field: Header("Landing Item")]
     [field: SerializeField] public EventReference landingItem { get; private set; }
-    [field: Header("Gain Crystal")]
-    [field: SerializeField] public EventReference crystal { get; private set; }
+    [field: Header("Gain Skill Item")]
+    [field: SerializeField] public EventReference gainSkillItem { get; private set; }
     [field: Header("StandardCamera")]
     [field: SerializeField] public EventReference changeDimension { get; private set; }
     [field: Header("DollyZoom2D")]
@@ -41,9 +41,8 @@ public class AudioManager : MonoBehaviour
     private void Awake()
     {
         EventManager.Subscribe("GainCube", PlayCubeSound);
-        EventManager.Subscribe("GainCrystal", PlayCrystalSound);
+        EventManager.Subscribe("OnGainSkillItem", PlaySkillItemSound);
         EventManager.Subscribe("CubP", PlayCubePedestalSound);
-        EventManager.Subscribe("CrysP", PlayCrystalPedestalSound);
         EventManager.Subscribe("DollyZoom2D", PlayDolly2DSound);
         EventManager.Subscribe("DollyZoom3D", PlayDolly3DSound);
         EventManager.Subscribe("JumpPad", PlayJumpPadSound);
@@ -73,9 +72,8 @@ public class AudioManager : MonoBehaviour
     private void OnDestroy()
     {
         EventManager.Unsubscribe("GainCube", PlayCubeSound);
-        EventManager.Unsubscribe("GainCrystal", PlayCrystalSound);
+        EventManager.Unsubscribe("GainCrystal", PlaySkillItemSound);
         EventManager.Unsubscribe("CubP", PlayCubePedestalSound);
-        EventManager.Unsubscribe("CrysP", PlayCrystalPedestalSound);
         EventManager.Unsubscribe("DollyZoom2D", PlayDolly2DSound);
         EventManager.Unsubscribe("DollyZoom3D", PlayDolly3DSound);
         EventManager.Unsubscribe("JumpPad", PlayJumpPadSound);
@@ -103,18 +101,14 @@ public class AudioManager : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot(cube, transform.position);
     }
 
-    private void PlayCrystalSound()
+    private void PlaySkillItemSound()
     {
-        FMODUnity.RuntimeManager.PlayOneShot(crystal, transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot(gainSkillItem, transform.position);
     }
 
     private void PlayCubePedestalSound()
     {
         FMODUnity.RuntimeManager.PlayOneShot(cube, transform.position);
-    }
-    private void PlayCrystalPedestalSound()
-    {
-        FMODUnity.RuntimeManager.PlayOneShot(crystal, transform.position);
     }
     private void PlayDolly2DSound()
     {
