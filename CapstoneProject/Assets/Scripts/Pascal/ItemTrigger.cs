@@ -32,6 +32,7 @@ public class ItemTrigger : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
+                EventManager.TriggerEvent("LandingItem");
                 EventManager.TriggerEvent("TextOff");
                 item.SetActive(true);
                 itemUsed = true;

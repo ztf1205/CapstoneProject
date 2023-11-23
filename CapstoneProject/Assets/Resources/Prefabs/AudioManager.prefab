@@ -51,6 +51,20 @@ MonoBehaviour:
       Data3: 1373313951
       Data4: 190057841
     Path: event:/SFX/GainCube
+  <getItem>k__BackingField:
+    Guid:
+      Data1: -1558638039
+      Data2: 1279387864
+      Data3: -142504780
+      Data4: 111742872
+    Path: event:/GainItem
+  <landingItem>k__BackingField:
+    Guid:
+      Data1: -1396226629
+      Data2: 1219864756
+      Data3: 856767386
+      Data4: 1005948316
+    Path: event:/LandingItem
   <crystal>k__BackingField:
     Guid:
       Data1: 1365387666

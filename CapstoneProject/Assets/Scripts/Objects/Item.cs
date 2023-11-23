@@ -10,6 +10,7 @@ public class Item : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && !IsAcquired)
         {
+            EventManager.TriggerEvent("GetItem");
             IsAcquired = true;
             gameObject.SetActive(false);
         }

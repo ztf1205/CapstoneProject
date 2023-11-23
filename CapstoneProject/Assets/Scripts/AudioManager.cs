@@ -7,6 +7,10 @@ public class AudioManager : MonoBehaviour
 {
     [field: Header("Gain Cube")]
     [field: SerializeField] public EventReference cube { get; private set; }
+    [field: Header("Get Item")]
+    [field: SerializeField] public EventReference getItem { get; private set; }
+    [field: Header("Landing Item")]
+    [field: SerializeField] public EventReference landingItem { get; private set; }
     [field: Header("Gain Crystal")]
     [field: SerializeField] public EventReference crystal { get; private set; }
     [field: Header("StandardCamera")]
@@ -49,6 +53,8 @@ public class AudioManager : MonoBehaviour
         EventManager.Subscribe("OnPlayerWalkEnd", OffWalkingSound);
         EventManager.Subscribe("OnPlayerJump", PlayJumpSound);
         EventManager.Subscribe("SwitchDimensionFailSound", PlaySwitchDimensionFailSound);
+        EventManager.Subscribe("GetItem", PlayGetItemSound);
+        EventManager.Subscribe("LandingItem", PlayLandingItemSound);
 
         if (_timeStop.IsNull == false)
         {
@@ -78,6 +84,8 @@ public class AudioManager : MonoBehaviour
         EventManager.Unsubscribe("OnPlayerWalkEnd", OffWalkingSound);
         EventManager.Unsubscribe("OnPlayerJump", PlayJumpSound);
         EventManager.Unsubscribe("SwitchDimensionFailSound", PlaySwitchDimensionFailSound);
+        EventManager.Unsubscribe("GetItem", PlayGetItemSound);
+        EventManager.Unsubscribe("GetItem", PlayLandingItemSound);
 
         OffTimeStopSound();
         OffWalkingSound();
@@ -151,5 +159,13 @@ public class AudioManager : MonoBehaviour
     private void PlaySwitchDimensionFailSound()
     {
         FMODUnity.RuntimeManager.PlayOneShot(switchDimensionFail, transform.position);
+    }
+    private void PlayGetItemSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(getItem, transform.position);
+    }
+    private void PlayLandingItemSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(landingItem, transform.position);
     }
 }
