@@ -3420,7 +3420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3524703417992725665, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.27
+      value: 17.466
       objectReference: {fileID: 0}
     - target: {fileID: 3524703417992725665, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3428,7 +3428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3524703417992725665, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 45.93
+      value: 46.886
       objectReference: {fileID: 0}
     - target: {fileID: 3524703418250090469, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
       propertyPath: IsDollyZoomMode
@@ -16345,7 +16345,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8245360965433934680, guid: 864c1d4b35f19bf48b212192ca7c9ec9, type: 3}
       propertyPath: m_Name
-      value: Check Point Flag
+      value: CheckPoint Flag
       objectReference: {fileID: 0}
     - target: {fileID: 8729867994416519650, guid: 864c1d4b35f19bf48b212192ca7c9ec9, type: 3}
       propertyPath: m_RootOrder
