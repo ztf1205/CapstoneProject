@@ -25,7 +25,7 @@ public class ZRaycaster : MonoBehaviour
     private void CheckDimensionSwitchAvailability()
     {
         // Ray 발사 위치
-        Vector3 pos = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z - 20f);
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z - 20f);
         
         Debug.DrawRay(pos, Vector3.forward*40f, Color.red);
 
