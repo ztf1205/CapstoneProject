@@ -10,6 +10,5 @@ public class SuperJumpPad : JumpPad
     public override void ChangeHeight()
     {
         jumpHeight = superJumpHeight;
-        EventManager.TriggerEvent("SuperJumpPad");
     }
 }

@@ -17,12 +17,20 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public EventReference onDolly3D { get; private set; }
     [field: Header("JumpPad")]
     [field: SerializeField] public EventReference jumpPad { get; private set; }
-    [field: Header("SuperJumpPad")]
-    [field: SerializeField] public EventReference superJumpPad { get; private set; }
     [field: Header("TimeStop")]
     [field: SerializeField] private FMODUnity.EventReference _timeStop;
     private FMOD.Studio.EventInstance timeStop;
-    
+
+    [field: Header("Running")]
+    [field: SerializeField] private FMODUnity.EventReference _running;
+    private FMOD.Studio.EventInstance running;
+    [field: Header("Jump")]
+    [field: SerializeField] public EventReference jump { get; private set; }
+    [field: Header("Landing")]
+    [field: SerializeField] public EventReference landing { get; private set; }
+    [field: Header("SwitchDimensionFail")]
+    [field: SerializeField] public EventReference switchDimensionFail { get; private set; }
+
 
     private void Awake()
     {
@@ -33,14 +41,19 @@ public class AudioManager : MonoBehaviour
         EventManager.Subscribe("DollyZoom2D", PlayDolly2DSound);
         EventManager.Subscribe("DollyZoom3D", PlayDolly3DSound);
         EventManager.Subscribe("JumpPad", PlayJumpPadSound);
-        EventManager.Subscribe("SuperJumpPad", PlaySuperJumpPadSound);
         EventManager.Subscribe("TimeStop", PlayTimeStopSound);
         EventManager.Subscribe("StandardCamera", PlayChangeDimensionSound);
         EventManager.Subscribe("OffTimeStop", OffTimeStopSound);
+        EventManager.Subscribe("OnPlayerLanding", PlayLandingSound);
+        EventManager.Subscribe("OnPlayerWalkStart", PlayWalkingSound);
+        EventManager.Subscribe("OnPlayerWalkEnd", OffWalkingSound);
+        EventManager.Subscribe("OnPlayerJump", PlayJumpSound);
+        EventManager.Subscribe("SwitchDimensionFailSound", PlaySwitchDimensionFailSound);
 
-        if (!_timeStop.IsNull)
+        if (!_timeStop.IsNull && !_running.IsNull)
         {
             timeStop = FMODUnity.RuntimeManager.CreateInstance(_timeStop);
+            running = FMODUnity.RuntimeManager.CreateInstance(_running);
         }
 
     }
@@ -54,11 +67,16 @@ public class AudioManager : MonoBehaviour
         EventManager.Unsubscribe("DollyZoom2D", PlayDolly2DSound);
         EventManager.Unsubscribe("DollyZoom3D", PlayDolly3DSound);
         EventManager.Unsubscribe("JumpPad", PlayJumpPadSound);
-        EventManager.Unsubscribe("SuperJumpPad", PlaySuperJumpPadSound);
         EventManager.Unsubscribe("TimeStop", PlayTimeStopSound);
         EventManager.Unsubscribe("StandardCamera", PlayChangeDimensionSound);
         EventManager.Unsubscribe("OffTimeStop", OffTimeStopSound);
+        EventManager.Unsubscribe("OnPlayerLanding", PlayLandingSound);
+        EventManager.Unsubscribe("OnPlayerWalkStart", PlayWalkingSound);
+        EventManager.Unsubscribe("OnPlayerWalkEnd", OffWalkingSound);
+        EventManager.Unsubscribe("OnPlayerJump", PlayJumpSound);
+        EventManager.Unsubscribe("SwitchDimensionFailSound", PlaySwitchDimensionFailSound);
         timeStop.release();
+        running.release();
     }
 
     private void PlayCubeSound()
@@ -91,11 +109,6 @@ public class AudioManager : MonoBehaviour
     {
         FMODUnity.RuntimeManager.PlayOneShot(jumpPad, transform.position);
     }
-    private void PlaySuperJumpPadSound()
-    {
-        Debug.Log("초강력 점프!");
-        //FMODUnity.RuntimeManager.PlayOneShot(superJumpPad, transform.position);
-    }
     private void PlayTimeStopSound()
     {
         timeStop.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
@@ -109,5 +122,27 @@ public class AudioManager : MonoBehaviour
     private void PlayChangeDimensionSound()
     {
         FMODUnity.RuntimeManager.PlayOneShot(changeDimension, transform.position);
+    }
+    private void PlayWalkingSound()
+    {
+        running.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
+
+        running.start();
+    }
+    private void OffWalkingSound()
+    {
+        running.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+    }
+    private void PlayJumpSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(jump, transform.position);
+    }
+    private void PlayLandingSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(landing, transform.position);
+    }
+    private void PlaySwitchDimensionFailSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(switchDimensionFail, transform.position);
     }
 }
