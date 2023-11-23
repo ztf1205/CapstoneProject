@@ -44,6 +44,7 @@ public class SolverCollision : MonoBehaviour
         }
         catch (ArgumentException ex)
         {
+            Debug.LogError(ex);
             return;
         }
     }

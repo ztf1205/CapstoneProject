@@ -50,12 +50,15 @@ public class AudioManager : MonoBehaviour
         EventManager.Subscribe("OnPlayerJump", PlayJumpSound);
         EventManager.Subscribe("SwitchDimensionFailSound", PlaySwitchDimensionFailSound);
 
-        if (!_timeStop.IsNull && !_running.IsNull)
+        if (_timeStop.IsNull == false)
         {
             timeStop = FMODUnity.RuntimeManager.CreateInstance(_timeStop);
-            running = FMODUnity.RuntimeManager.CreateInstance(_running);
         }
 
+        if (_running.IsNull == false)
+        {
+            running = FMODUnity.RuntimeManager.CreateInstance(_running);
+        }
     }
 
     private void OnDestroy()
@@ -75,6 +78,10 @@ public class AudioManager : MonoBehaviour
         EventManager.Unsubscribe("OnPlayerWalkEnd", OffWalkingSound);
         EventManager.Unsubscribe("OnPlayerJump", PlayJumpSound);
         EventManager.Unsubscribe("SwitchDimensionFailSound", PlaySwitchDimensionFailSound);
+
+        OffTimeStopSound();
+        OffWalkingSound();
+
         timeStop.release();
         running.release();
     }
