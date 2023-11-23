@@ -6,7 +6,6 @@ public class VcamManager : MonoBehaviour
 {
     [SerializeField] private GameObject TpsCamera;
     [SerializeField] private GameObject SubCamera;
-    [SerializeField] private float waitTime = 10.0f; 
 
     private bool isTps = true;
 

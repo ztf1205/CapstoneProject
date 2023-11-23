@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ResizableObject : MonoBehaviour
 {
-    private Collider collider;
+    private Collider objectCollider;
 
     private BoxCollider boxCollider = null;
     private CapsuleCollider capsuleCollider = null;
@@ -24,17 +24,17 @@ public class ResizableObject : MonoBehaviour
 
     private void Init()
     {
-        collider = GetComponent<Collider>();
+        objectCollider = GetComponent<Collider>();
         dimManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
 
-        if (collider is BoxCollider)
+        if (objectCollider is BoxCollider)
         {
-            boxCollider = (BoxCollider)collider;
+            boxCollider = (BoxCollider)objectCollider;
             originalSize = boxCollider.size;
         }
-        else if (collider is CapsuleCollider)
+        else if (objectCollider is CapsuleCollider)
         {
-            capsuleCollider = (CapsuleCollider)collider;
+            capsuleCollider = (CapsuleCollider)objectCollider;
             originalHeight = capsuleCollider.height;
         }
     }
@@ -48,9 +48,9 @@ public class ResizableObject : MonoBehaviour
     private void Update()
     {
         if (dimManager.Is2D)
-            collider.enabled = isCollision2DEnabled;
+            objectCollider.enabled = isCollision2DEnabled;
         else
-            collider.enabled = true;
+            objectCollider.enabled = true;
     }
 
     private void ResizeCollider()

@@ -6,11 +6,11 @@ public class CubeHolder : SignalGenerator
 {
     [SerializeField] private GameObject cube;
 
-    private bool isActivate = false;
-
+    private bool isEmpty = true;
+    
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player") && Cube.Count() > 0 && isActivate == false)
+        if (collision.gameObject.CompareTag("Player") && Cube.Count() > 0 && isEmpty == true)
         {
             GeneratorActivate();
             EventManager.TriggerEvent("CubP");
@@ -22,7 +22,7 @@ public class CubeHolder : SignalGenerator
         base.GeneratorActivate();
         Cube.DecreaseCount();
         cube.SetActive(true);
-        isActivate = true;
+        isEmpty = false;
     }
 
     protected override void GeneratorDeactivate()
