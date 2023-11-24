@@ -163,3 +163,10 @@ MonoBehaviour:
       Data3: 1018825658
       Data4: -1928166886
     Path: event:/OnFlag
+  <fireExtingushSound>k__BackingField:
+    Guid:
+      Data1: 712016666
+      Data2: 1223907434
+      Data3: 323541690
+      Data4: -165963569
+    Path: event:/FireExtingush
