@@ -44,6 +44,8 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public EventReference checkPointSound { get; private set; }
     [field: Header("Fire Extingush")]
     [field: SerializeField] public EventReference fireExtingushSound { get; private set; }
+    [field: Header("Rotate Pipe")]
+    [field: SerializeField] public EventReference rotatePipeSound { get; private set; }
 
 
     private void Awake()
@@ -69,6 +71,7 @@ public class AudioManager : MonoBehaviour
         EventManager.Subscribe("LevelClear", PlayLevelClearSound);
         EventManager.Subscribe("OnFlag", PlayCheckPointSound); 
         EventManager.Subscribe("FireExtingush", PlayFireExtingushSound);
+        EventManager.Subscribe("RotatePipe", PlayPipeRotateSound);
 
         if (_timeStop.IsNull == false)
         {
@@ -104,6 +107,7 @@ public class AudioManager : MonoBehaviour
         EventManager.Unsubscribe("LevelClear", PlayLevelClearSound);
         EventManager.Unsubscribe("OnFlag", PlayCheckPointSound);
         EventManager.Unsubscribe("FireExtingush", PlayFireExtingushSound);
+        EventManager.Unsubscribe("RotatePipe", PlayPipeRotateSound);
 
         OffTimeStopSound();
         OffWalkingSound();
@@ -201,5 +205,9 @@ public class AudioManager : MonoBehaviour
     private void PlayFireExtingushSound()
     {
         FMODUnity.RuntimeManager.PlayOneShot(fireExtingushSound, transform.position);
+    }
+    private void PlayPipeRotateSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(rotatePipeSound, transform.position);
     }
 }

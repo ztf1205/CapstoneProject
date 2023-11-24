@@ -14,6 +14,7 @@ public class PipeRotator : MonoBehaviour
         if (canRotate && Input.GetKeyDown(KeyCode.E))
         {
             RotatePipe();
+            EventManager.TriggerEvent("RotatePipe");
         }
     }
 

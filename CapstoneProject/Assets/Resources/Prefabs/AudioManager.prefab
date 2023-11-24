@@ -170,3 +170,10 @@ MonoBehaviour:
       Data3: 323541690
       Data4: -165963569
     Path: event:/FireExtingush
+  <rotatePipeSound>k__BackingField:
+    Guid:
+      Data1: 137879422
+      Data2: 1146211583
+      Data3: -882012004
+      Data4: -213575168
+    Path: event:/RotatePipe
