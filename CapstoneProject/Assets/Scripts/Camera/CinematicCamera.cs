@@ -90,13 +90,36 @@ public class CinematicCamera : MonoBehaviour
         if (cinematicCam.fieldOfView <= fovLowerLimit)
         {
             dzEnabled = false;
-            cinematicCam.orthographic = true;
 
-            cinematicCam.enabled = false;
-            twoDimensionCam.enabled = true;
-
-            EventManager.TriggerEvent("OnEndDollyZoom");
+            var twoDimensionCamScript = twoDimensionCam.GetComponent<TwoDimensionCamera>();
+            var tdCurOrthoSize = twoDimensionCamScript.CurOrthoSize;
+            var tdDefaultOrthoSize = twoDimensionCamScript.DefaultOrthoSize;
+            // Pascal일 때
+            if (dimManager.isLevel4 && (tdCurOrthoSize != tdDefaultOrthoSize))
+            {
+                cinematicCam.orthographic = true;
+                cinematicCam.DOOrthoSize(tdCurOrthoSize, 0.5f)
+                    .OnComplete(() =>
+                    {
+                        EndDollyZoom_3DTo2D();
+                        cinematicCam.orthographicSize = tdDefaultOrthoSize;
+                    });
+            }
+            // 아닐 때
+            else
+            {
+                cinematicCam.orthographic = true;
+                EndDollyZoom_3DTo2D();
+            }
         }
+    }
+
+    private void EndDollyZoom_3DTo2D()
+    {
+        cinematicCam.enabled = false;
+        twoDimensionCam.enabled = true;
+
+        EventManager.TriggerEvent("OnEndDollyZoom");
     }
 
     private void DollyZoom_2DTo3D()
