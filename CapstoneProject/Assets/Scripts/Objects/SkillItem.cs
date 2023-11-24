@@ -10,6 +10,7 @@ public class SkillItem : MonoBehaviour
         {
             gameObject.SetActive(false);
             EventManager.TriggerEvent("OnGainSkillItem");
+            EventManager.TriggerEvent("SkillTextOn");
         }
     }
 }
