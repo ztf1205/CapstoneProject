@@ -5261,6 +5261,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 96483373, guid: b3018625f38a4784ebfd6709af324890, type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 96483373, guid: b3018625f38a4784ebfd6709af324890, type: 3}
+      propertyPath: OverrideMinDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8616907681627111804, guid: b3018625f38a4784ebfd6709af324890, type: 3}
       propertyPath: m_Name
       value: Lava
