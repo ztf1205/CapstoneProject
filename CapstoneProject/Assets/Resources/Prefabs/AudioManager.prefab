@@ -177,3 +177,10 @@ MonoBehaviour:
       Data3: -882012004
       Data4: -213575168
     Path: event:/RotatePipe
+  <OpenDoorSound>k__BackingField:
+    Guid:
+      Data1: -1209312475
+      Data2: 1290334959
+      Data3: 1638331804
+      Data4: 571837600
+    Path: event:/OpenDoor
