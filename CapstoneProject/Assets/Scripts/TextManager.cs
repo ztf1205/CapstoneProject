@@ -23,13 +23,13 @@ public class TextManager : MonoBehaviour
 
     private void ItemTextOn()
     {
-        text.SetText("아이템을 사용하려면[E] 키를 누르세요.");
+        text.SetText("아이템을 사용하려면 [E]키를 누르세요.");
         canvas.enabled = true;
     }
 
     private void SwitchTextOn()
     {
-        text.SetText("[E] 키를 눌러 상호작용하세요.");
+        text.SetText("[E]키를 눌러 상호작용하세요.");
         canvas.enabled = true;
     }
 
