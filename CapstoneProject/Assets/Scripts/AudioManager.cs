@@ -42,6 +42,8 @@ public class AudioManager : MonoBehaviour
     [field: SerializeField] public EventReference switchDimensionFail { get; private set; }
     [field: Header("On Flag")]
     [field: SerializeField] public EventReference checkPointSound { get; private set; }
+    [field: Header("Fire Extingush")]
+    [field: SerializeField] public EventReference fireExtingushSound { get; private set; }
 
 
     private void Awake()
@@ -65,7 +67,8 @@ public class AudioManager : MonoBehaviour
         EventManager.Subscribe("Respawn", PlayRespawnSound);
         EventManager.Subscribe("GameClear", PlayGameClearSound);
         EventManager.Subscribe("LevelClear", PlayLevelClearSound);
-        EventManager.Subscribe("OnFlag", PlayCheckPointSound);
+        EventManager.Subscribe("OnFlag", PlayCheckPointSound); 
+        EventManager.Subscribe("FireExtingush", PlayFireExtingushSound);
 
         if (_timeStop.IsNull == false)
         {
@@ -100,6 +103,7 @@ public class AudioManager : MonoBehaviour
         EventManager.Unsubscribe("GameClear", PlayGameClearSound);
         EventManager.Unsubscribe("LevelClear", PlayLevelClearSound);
         EventManager.Unsubscribe("OnFlag", PlayCheckPointSound);
+        EventManager.Unsubscribe("FireExtingush", PlayFireExtingushSound);
 
         OffTimeStopSound();
         OffWalkingSound();
@@ -193,5 +197,9 @@ public class AudioManager : MonoBehaviour
     private void PlayCheckPointSound()
     {
         FMODUnity.RuntimeManager.PlayOneShot(checkPointSound, transform.position);
+    }
+    private void PlayFireExtingushSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(fireExtingushSound, transform.position);
     }
 }

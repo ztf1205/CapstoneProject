@@ -847,7 +847,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   EffectFlags:
     components: []
-  sharedInstanceID: ae942b29-d39e-4504-b8ae-4dd3bd0e69e5
+  sharedInstanceID: 6846d715-6c10-4115-ab86-f178fab36c86
 --- !u!114 &1617377665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -898,7 +898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
+  attenuationObject: {fileID: 3524703417992239233}
 --- !u!1 &1987866228556544211
 GameObject:
   m_ObjectHideFlags: 0
@@ -8419,6 +8419,7 @@ MonoBehaviour:
   twoDimensionCam: {fileID: 3524703420134329121}
   twoDimensionPlayerCollisionCam: {fileID: 2327783081994334324}
   cinematicCam: {fileID: 258164815}
+  isLevel4: 0
 --- !u!1 &3524703420134329121
 GameObject:
   m_ObjectHideFlags: 0

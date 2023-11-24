@@ -223,7 +223,7 @@ Transform:
   - {fileID: 2062324348}
   - {fileID: 1809592097}
   m_Father: {fileID: 1452586257}
-  m_RootOrder: 10
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &130175194
 PrefabInstance:
@@ -1415,6 +1415,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 96483373, guid: b3018625f38a4784ebfd6709af324890, type: 3}
+      propertyPath: StopEvent
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 96483373, guid: b3018625f38a4784ebfd6709af324890, type: 3}
+      propertyPath: OverrideMaxDistance
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 96483373, guid: b3018625f38a4784ebfd6709af324890, type: 3}
+      propertyPath: OverrideMinDistance
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 8616907681627111804, guid: b3018625f38a4784ebfd6709af324890, type: 3}
       propertyPath: m_Name
       value: Lava
@@ -1737,10 +1749,10 @@ Transform:
   - {fileID: 1016543747}
   - {fileID: 888435040}
   - {fileID: 703306501}
+  - {fileID: 70184859}
   - {fileID: 2011548146}
   - {fileID: 535396349}
   - {fileID: 1064388380}
-  - {fileID: 70184859}
   - {fileID: 581303347}
   - {fileID: 1064486772}
   - {fileID: 874239205}

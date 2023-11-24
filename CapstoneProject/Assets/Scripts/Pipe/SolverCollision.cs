@@ -35,6 +35,10 @@ public class SolverCollision : MonoBehaviour
                     var col = world.colliderHandles[contact.bodyB].owner;
                     if (col == fireCollider)
                     {
+                        if (fire.HP == 3000)
+                        {
+                            EventManager.TriggerEvent("FireExtingush");
+                        }
                         fire.ReduceHP(1);
                         if (fire.HP <= 0)
                             OnFireDied();
