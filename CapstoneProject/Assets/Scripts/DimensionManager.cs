@@ -10,6 +10,8 @@ public class DimensionManager : MonoBehaviour
     public GameObject twoDimensionPlayerCollisionCam;
     public GameObject cinematicCam;
 
+    public bool isLevel4 = false;
+
     public bool Is2D { get; set; } = false;
     private bool canSwitchDimension;
     public bool CanSwitchDimension
@@ -44,6 +46,7 @@ public class DimensionManager : MonoBehaviour
         if (isDollyZoomMode)
         {
             cinematicCam.GetComponent<CinematicCamera>().StartDollyZoom();
+            SetOutlineEffect();
         }
         else
         {

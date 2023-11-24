@@ -3345,7 +3345,7 @@ PrefabInstance:
     - target: {fileID: 258164822, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
       propertyPath: particleRenderers.Array.data[1]
       value: 
-      objectReference: {fileID: 56072664}
+      objectReference: {fileID: 952796824}
     - target: {fileID: 634589026, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
       propertyPath: particleRenderers.Array.size
       value: 2
@@ -3420,7 +3420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3524703417992725665, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.466
+      value: 16.99
       objectReference: {fileID: 0}
     - target: {fileID: 3524703417992725665, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3428,7 +3428,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3524703417992725665, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 46.886
+      value: 46.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3524703418250090469, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
+      propertyPath: isLevel4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3524703418250090469, guid: c523bf9e96c321649af4b50cb156b897, type: 3}
       propertyPath: IsDollyZoomMode
@@ -11546,6 +11550,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4430340635691708, guid: bb98861c48ad2024ca93498c7dd93a6c, type: 3}
   m_PrefabInstance: {fileID: 1434668469}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1438289002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1438289004}
+  - component: {fileID: 1438289003}
+  m_Layer: 0
+  m_Name: BurstCollisionWorld
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1438289003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438289002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellSpans:
+    m_AlignBytes: 16
+--- !u!4 &1438289004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438289002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1443270146 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4430340635691708, guid: bb98861c48ad2024ca93498c7dd93a6c, type: 3}
@@ -12560,52 +12610,6 @@ MonoBehaviour:
     iterations: 1
     SORFactor: 1
     enabled: 0
---- !u!1 &1623971724
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1623971726}
-  - component: {fileID: 1623971725}
-  m_Layer: 0
-  m_Name: BurstCollisionWorld
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1623971725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623971724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1a161c4294214a4fbcb7e9e94800494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cellSpans:
-    m_AlignBytes: 16
---- !u!4 &1623971726
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1623971724}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1624508978 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8102332304614999632, guid: ebca51ff556e07540a2473a31991180a, type: 3}

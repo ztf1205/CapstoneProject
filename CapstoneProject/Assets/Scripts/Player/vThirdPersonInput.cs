@@ -142,6 +142,11 @@ namespace Invector.vCharacterController
             {
                 MoveStopActivate(false);
             }
+
+            // Pipe에서 Dolly Zoom이 끝나야 pipe 재배치
+            if (dimManager.Is2D && dimManager.isLevel4)
+                EventManager.TriggerEvent("PipeChangePosZ");
+
         }
 
         private void OnGainSkillItem()
@@ -238,7 +243,7 @@ namespace Invector.vCharacterController
                 else
                 {
                     SwitchDimension();
-                    EventManager.TriggerEvent("StandardCamera");
+                    //EventManager.TriggerEvent("StandardCamera");
                 }
             }
         }
@@ -261,7 +266,8 @@ namespace Invector.vCharacterController
                     isCollisionCheckState = true;
                 }
             }
-            dimManager.SwitchDimension(false);
+            OnStartDollyZoom();
+            dimManager.SwitchDimension(true);
         }
 
         private void CursorHandle()

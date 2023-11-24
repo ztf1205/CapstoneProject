@@ -18,18 +18,14 @@ public class PipeManager : MonoBehaviour
     {
         dimManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
         SavePosZ();
+
+        EventManager.Subscribe("PipeChangePosZ", ChangePosZ);
     }
 
     private void Update()
     {
-        if (dimManager.Is2D)
-        {
-            ChangePosZ();
-        }
-        else
-        {
+        if (!dimManager.Is2D)
             ResetPosZ();
-        }
     }
 
     private void SavePosZ()
@@ -69,5 +65,10 @@ public class PipeManager : MonoBehaviour
             var pipe = pipes.GetChild(i);
             pipe.position = pipesOriginPos[i - 1];
         }
+    }
+
+    private void OnDestroy()
+    {
+        EventManager.Unsubscribe("PipeChangePosZ", ChangePosZ);
     }
 }
