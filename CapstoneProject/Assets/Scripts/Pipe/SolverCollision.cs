@@ -16,8 +16,11 @@ public class SolverCollision : MonoBehaviour
 
     [SerializeField] private ObiEmitter emitter2;
 
+    private DimensionManager dimManager;
+
     void Start()
     {
+        dimManager = GameObject.Find("DimensionManager").GetComponent<DimensionManager>();
         solver = GetComponent<ObiSolver>();
         solver.OnCollision += Solver_OnCollision;
     }
@@ -28,20 +31,23 @@ public class SolverCollision : MonoBehaviour
 
         try
         {
-            foreach (Oni.Contact contact in e.contacts)
+            if (dimManager.Is2D)
             {
-                if (contact.distance < 0.01f)
+                foreach (Oni.Contact contact in e.contacts)
                 {
-                    var col = world.colliderHandles[contact.bodyB].owner;
-                    if (col == fireCollider)
+                    if (contact.distance < 0.01f)
                     {
-                        if (fire.HP == 3000)
+                        var col = world.colliderHandles[contact.bodyB].owner;
+                        if (col == fireCollider)
                         {
-                            EventManager.TriggerEvent("FireExtingush");
+                            if (fire.HP == 3000)
+                            {
+                                EventManager.TriggerEvent("FireExtingush");
+                            }
+                            fire.ReduceHP(1);
+                            if (fire.HP <= 0)
+                                OnFireDied();
                         }
-                        fire.ReduceHP(1);
-                        if (fire.HP <= 0)
-                            OnFireDied();
                     }
                 }
             }
