@@ -35,7 +35,7 @@ public class TextManager : MonoBehaviour
 
     private void SkillTextOn()
     {
-        text.SetText("차원 스위치 스킬을 획득하였습니다!" + "\n" + "마우스 왼쪽 버튼을 클릭해보세요.");
+        text.SetText("디멘션 스위치 스킬을 획득하였습니다!" + "\n" + "마우스 왼쪽 버튼을 클릭해보세요.");
         canvas.enabled = true;
         Invoke("TextOff", 3f);
     }
