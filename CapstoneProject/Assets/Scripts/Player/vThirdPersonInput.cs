@@ -266,7 +266,6 @@ namespace Invector.vCharacterController
                     isCollisionCheckState = true;
                 }
             }
-            OnStartDollyZoom();
             dimManager.SwitchDimension(true);
         }
 
@@ -310,7 +309,7 @@ namespace Invector.vCharacterController
                 SetActiveUI(true);
             }
 
-            if (Input.GetKeyUp(KeyCode.Mouse1) && isCollisionCheckState == false)
+            if (Input.GetKeyUp(KeyCode.Mouse1) && isCollisionCheckState == false && isDollyZoom == false)
             {
                 EventManager.TriggerEvent("OffTimeStop");
                 MoveStopActivate(false);

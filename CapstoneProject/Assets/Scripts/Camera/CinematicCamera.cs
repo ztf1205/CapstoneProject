@@ -159,6 +159,8 @@ public class CinematicCamera : MonoBehaviour
 
     public void StartDollyZoom()
     {
+        EventManager.TriggerEvent("OnStartDollyZoom");
+
         // 3D -> 2D
         if (dimManager.Is2D)
         {
